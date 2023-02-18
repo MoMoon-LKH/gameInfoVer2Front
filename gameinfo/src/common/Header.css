@@ -1,0 +1,35 @@
+.header-nav {
+    display: flex;
+    text-align: right;
+    margin: 10px;
+    justify-content: space-between;
+  }
+  
+.header-item {
+  flex-basis: 100px;
+  text-align: center;
+  margin: 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #585858;
+}
+
+button {
+  border: none;
+  width: 80px;
+  height: 30px;
+  color: white;
+  background-color: #585858;
+}
+
+button:hover {
+  background-color: #363636;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}

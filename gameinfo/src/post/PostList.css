@@ -1,0 +1,14 @@
+.post-list{
+    margin: auto;
+}
+
+.post-item {
+    display: flex;
+    justify-content: left;
+    margin: 10px;
+}
+
+.item {
+    margin-right: 10px;
+}
+
