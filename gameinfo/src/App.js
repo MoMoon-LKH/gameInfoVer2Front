@@ -4,6 +4,8 @@ import Header from './common/Header'
 import PostList from './post/PostList';
 import PostDetail from './post/PostDetail';
 import Login from './auth/Login';
+import Register from './member/Register';
+import RegisterTerms from './member/RegisterTerms';
 
 function App() {
 
@@ -14,9 +16,11 @@ function App() {
         <Header/>
         <div className='content-body'>
           <Routes>
-            <Route path='/' element={<PostList/>}></Route>
+            <Route exact path='/' element={<PostList/>}></Route>
             <Route path='/post/:postId' element={<PostDetail/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
+            <Route path='/register/terms' element={<RegisterTerms/>}></Route>
+            <Route path='/register' element={<Register/>}></Route>
           </Routes>
         </div>
       </BrowserRouter>

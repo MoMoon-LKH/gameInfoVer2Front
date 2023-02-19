@@ -1,0 +1,62 @@
+.register-terms {
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 40%;
+    border: 1px solid gray;
+}
+
+.register-title {
+    margin: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    color: gray;
+}
+
+
+
+.terms-body {
+    margin: auto;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.terms {
+    margin-bottom: 30px;
+}
+
+.terms-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+
+textarea {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    font-size: 18px;
+    background-color: lightgray;
+}
+
+.terms-check {
+    text-align: right;
+    font-size: 13px;
+}
+
+.terms-btn-div { 
+    margin: 20px;
+}
+
+.terms-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #1a70dc;
+}
+
+.terms-btn:hover {
+    background-color: #126eb4;
+}
+
+

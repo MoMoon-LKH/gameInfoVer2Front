@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css';
+import {Link} from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -17,8 +18,10 @@ const Login = () => {
                     <input id='password' className='login-input' type={'password'} placeholder='PASSWORD'/>
                 </div>
                 <div className='login-item'>
-                    <span>ID/PW 찾기</span>
-                    <span>회원가입</span>
+                    <div className='login-sub'>
+                        <Link to=''><div className='login-sub-link'>ID/PW 찾기</div></Link>
+                        <Link to='/register/terms'><div className='login-sub-link'>회원가입</div></Link>
+                    </div>
                 </div>
                 <div className='login-item-btn'>
                     <button className='btn-login'>Login</button>

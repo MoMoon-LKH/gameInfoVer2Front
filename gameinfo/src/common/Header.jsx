@@ -16,7 +16,7 @@ const header = () => {
 
         <div className='header-item'>
             <div className='header-sub'>
-                <Link to={'/login'}><button>로그인</button></Link>
+                <Link to={'/login'}><button className='login-btn'>로그인</button></Link>
             </div>
         </div>
     </div>
