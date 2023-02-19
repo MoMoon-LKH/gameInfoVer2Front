@@ -13,8 +13,6 @@
     color: gray;
 }
 
-
-
 .terms-body {
     margin: auto;
     margin-top: 20px;
@@ -53,6 +51,9 @@ textarea {
     width: 100%;
     height: 40px;
     background-color: #1a70dc;
+    color: white;
+    border: none;
+    font-weight: bold;
 }
 
 .terms-btn:hover {

@@ -1,19 +1,116 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Register.css'
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const Register = () => {
 
     const [loginId, setLoginId] = useState("");
     const [pwd, setPwd] = useState("");
     const [confirmPwd, setConfirmPwd] = useState("");
+    const [name, setName] = useState("");
+    const [nickname, setNickname] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [email, setEmail] = useState("");
+    const [authNum, setAuthNum] = useState("");
+    const [phoneNo, setPhoneNo] = useState("");
+
+    const [pwdMsg, setPwdMsg] = useState("");
+    const [confirmPwdMsg, setConfirmPwdMsg] = useState("");
+    const [boolId, setBoolId] = useState(false);
+    const [boolPwd, setBoolPwd] = useState(false);
+    const [boolConfirmPwd, setBoolConfirmPwd] = useState(false);
+    const [boolAuthNum, setBoolAtuhNum] = useState(false);
+
+    
 
     const confirmId = () => {
-        alert(loginId)
+       setBoolId(true)
     }
 
-    const confirmPw = () => {
 
+    const checkConfirmPwd = useCallback(() => {
+        if(confirmPwd !== ''){
+            if(pwd !== confirmPwd) {
+                setConfirmPwdMsg("입력하신 비밀번호와 다릅니다");
+                setBoolConfirmPwd(false);
+            } else {
+                setConfirmPwdMsg("");
+                setBoolConfirmPwd(true);
+            }
+        }
+    },[pwd, confirmPwd])
+   
+    const confirmAuthNum = () => {
+        
+        let bool = false;
+
+        if(authNum === '123123') {
+            bool = true;
+        }
+
+        if(bool) {
+            setBoolAtuhNum(true)
+        } else {
+            alert('인증번호가 틀립니다 \n' +
+            '다시 확인해보세요')
+        }
+
+    }
+
+    useEffect(()=>{
+
+        const regPwd = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/);
+
+        if(pwd !== "") {            
+            if(!regPwd.test(pwd)){
+                setPwdMsg("최소 8글자, 최소 하나의 문자, 숫자, 특수문자를 입력해주세요");
+                setBoolPwd(false);
+            } else {
+                setPwdMsg("");
+                setBoolPwd(true);
+            }
+        }
+
+        checkConfirmPwd();
+        
+    }, [pwd, checkConfirmPwd]);
+
+    useEffect(() => {
+        checkConfirmPwd();
+    }, [confirmPwd, checkConfirmPwd])
+
+
+    const registerMember = () => {
+
+        let bool = true;
+
+        const registerInfo = {
+            loginId: loginId,
+            password: pwd,
+            name: name,
+            birthday: birthday,
+            nickname: nickname,
+            phoneNo: phoneNo.replace('-', ''),
+            email: email,
+            boolCertifiedEmail: boolAuthNum
+        }
+
+        if(!boolId) {
+            bool = false;
+            alert('아이디 중복확인 해주세요')
+        }
+        if(!boolPwd || !boolConfirmPwd) {
+            bool = false;
+            alert('비밀번호를 확인해주세요')
+        }
+        if(!boolAuthNum) {
+            bool = false;
+            alert('이메일 인증을 해주세요')
+        }
+
+        if(bool){
+            alert(JSON.stringify(registerInfo))
+        }
     }
 
 
@@ -40,16 +137,76 @@ const Register = () => {
                     <div className='register-input-div'>
                         <input id='pwd' className='register-input' type={'password'} onChange={e => setPwd(e.target.value)}/>
                     </div>
+                    <div className='register-input-div'>
+                        <div className='check-msg'>{pwdMsg}</div>
+                    </div>
                 </div>
                 <div className='register-div'>
                     <div className='register-sub-title'>
                         <div className='sub-title-content'><span className='register-point'>*</span> 비밀번호 확인</div>
                     </div>
                     <div className='register-input-div'>
-                        <input id='confirmPwd' className='register-input' type={'password'}/>
+                        <input id='confirmPwd' className='register-input' type={'password'} onChange={e => setConfirmPwd(e.target.value)}/>
+                    </div>
+                    <div className='register-input-div'>
+                        <div className='check-msg'>{confirmPwdMsg}</div>
                     </div>
                 </div>
-                
+                <div className='register-div'>
+                    <div className='register-sub-title'>
+                        <div className='sub-title-content'><span className='register-point'>*</span> 이름</div>
+                    </div>
+                    <div className='register-input-div'>
+                        <input id='name' className='register-input' type={'text'} onChange={e => setName(e.target.value)}/>
+                    </div>
+                </div>
+
+                <div className='register-div'>
+                    <div className='register-sub-title'>
+                        <div className='sub-title-content'><span className='register-point'>*</span> 생년월일</div>
+                    </div>
+                    <div className='register-input-div'>
+                        <input id='birthday' className='register-input' type={'text'} 
+                        onChange={e => setBirthday(e.target.value)} placeholder={' ex) 19960212 주민번호 앞자리'}/>
+                    </div>
+                </div>
+                <div className='register-div'>
+                    <div className='register-sub-title'>
+                        <div className='sub-title-content'><span className='register-point'>*</span> 닉네임</div>
+                    </div>
+                    <div className='register-input-div'>
+                        <input id='nickname' className='register-input' type={'text'} onChange={e => setNickname(e.target.value)}/>
+                    </div>
+                </div>
+
+                <div className='register-div-email'>
+                    <div className='register-sub-title'>
+                        <div className='sub-title-content'><span className='register-point'>*</span> 이메일</div>
+                    </div>
+                    <div className='register-input-div'>
+                        <input id='email' className='register-input' type={'text'} 
+                        onChange={e => setEmail(e.target.value)} placeholder={' ex) test@gmail.com'}/>
+                        <button className='verify-btn'>전송</button>
+                        <div className='register-input-email'>
+                            <div style={{fontSize: '13px'}}>인증번호 : </div>
+                            <input type={'text'} onChange={e => setAuthNum(e.target.value)}/><button className='verify-btn' onClick={() => confirmAuthNum()}>확인</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='register-div'>
+                    <div className='register-sub-title'>
+                        <div className='sub-title-content'> 핸드폰 번호</div>
+                    </div>
+                    <div className='register-input-div'>
+                        <input id='phoneNo' className='register-input' type={'text'} onChange={e => setPhoneNo(e.target.value)}
+                            placeholder={' ex) 010-xxxx-xxxx'}/>
+                    </div>
+                </div>
+
+                <div className='register-btn-div'>
+                    <button className='register-btn' onClick={() => registerMember()}>회원가입</button>
+                </div>
 
             </div>
         </div>

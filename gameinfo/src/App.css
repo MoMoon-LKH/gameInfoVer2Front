@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  width: 85%;
   margin: auto;
 }
 
@@ -30,7 +29,10 @@
   color: #61dafb;
 }
 
-
+.content-body {
+  width: 85%;
+  margin: auto;
+}
 
 
 @keyframes App-logo-spin {

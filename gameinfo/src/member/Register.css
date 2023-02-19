@@ -2,7 +2,7 @@
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    width: 50%;
+    width: 60%;
     border: 1px solid gray;
 }
 
@@ -16,6 +16,7 @@
 .register-body {
     margin: auto;
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 90%;
 }
 
@@ -24,7 +25,19 @@
     text-align: left;
     border-top: 1px solid gray;
     height: 50px;
+    overflow-y: hidden;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.register-div-email{
+    display: flex;
+    text-align: left;
+    border-top: 1px solid gray;
+    height: 110px;
+    overflow-y: hidden;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 
@@ -45,6 +58,11 @@
     margin-left: 10px;
     width: 200px;
     height: 20px;
+}
+
+.register-input-email {
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 .register-point {
@@ -69,4 +87,33 @@
     font-size: 11px;
     text-align: right;
     margin-bottom: 5px;
+}
+
+.check-msg {
+    color: red;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+.register-btn-div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.register-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #1a70dc;
+    font-weight: bold;
+    color: white;
+    border: none;
+}
+
+.register-btn:hover {
+    cursor: pointer;
+    background-color: #126eb4;
+}
+
+.confirm-email-num {
+
 }
