@@ -52,6 +52,17 @@
     justify-content: center;
 }
 
-.post-likes-btn {
+.post-likes-btn-div {
+    display: flex;
+    margin: 20px 40px;
+}
+
+.post-likes-num {
+    font-size: 20px;
+    margin-right: 10px;
     
+}
+
+.post-likes-btn {
+    width: 30px;
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 import './PostDetail.css'
-import {AiOutlineLike, AiOutlineDislike, AiFillLike, AiFillDislike} from 'react-icons/ai'
+import {AiOutlineLike, AiOutlineDislike, AiFillLike, AiFillDislike} from 'react-icons/ai';
+import { useState } from 'react';
 
 const PostDetail = (props) => {
     
@@ -15,7 +16,9 @@ const PostDetail = (props) => {
         memberId: '1',
         nickname: '작성자',
         view: 15,
-        createDate: '2023-02-20 13:50:00',
+        likes: 20,
+        dislikes: 20,
+        createDate: '2023-02-20 13:50:00'
     }
 
     return (
@@ -46,10 +49,16 @@ const PostDetail = (props) => {
 
             <div className='post-likes-div'>
                 <div className='post-likes-btn-div'>
-                    <AiFillLike/>
+                    <div className='post-likes-num'>
+                        {post.likes}
+                    </div>
+                    <AiOutlineLike size={'30px'}/>
                 </div>
                 <div className='post-likes-btn-div'>
-                    <AiFillDislike/>
+                <div className='post-likes-num'>
+                        {post.dislikes}
+                    </div>
+                    <AiOutlineDislike size={'30px'}/>
                 </div>
             </div>
             

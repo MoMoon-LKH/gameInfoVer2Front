@@ -1,0 +1,37 @@
+.comment-title {
+    text-align: left;
+    font-size: 18px;
+    border-bottom: 1px solid lightgray;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+
+.comment {
+    border-bottom: 1px solid lightgray;
+    padding: 20px;
+}
+
+
+.comment-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-top-left {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-id {
+    display: none;
+}
+
+.comment-top-info {
+    margin-right: 10px;
+}
+
+.comment-content {
+    margin-top: 10px;
+    text-align: left;
+}
