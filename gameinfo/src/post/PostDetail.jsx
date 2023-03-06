@@ -16,8 +16,8 @@ const PostDetail = (props) => {
         memberId: '1',
         nickname: '작성자',
         view: 15,
-        likes: 20,
-        dislikes: 20,
+        likes: 0,
+        dislikes: 0,
         createDate: '2023-02-20 13:50:00'
     }
 

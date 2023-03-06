@@ -13,19 +13,21 @@ const PostList = (props) => {
     ];
     let [list, setList] = useState(example);
 
-    const postList = list.map(post => (
-        <Link to={'/post/' + post.id} key={post.id}>
-            <div className='post-item' >
-                    <div className='item'>{post.id} </div>
-                    <div className='item'>{post.title}</div>
-                    <div className='item'>[{post.commentCnt}]</div>
-            </div>
-        </Link>
-    ));
 
     return (
         <div className='post-list'>
-            {postList}
+            <div className='posts'>
+                {list.map(post => (                    
+                    <div className='post-item' >
+                        <div className='item item-title'> 
+                            <Link className='title-a' to={'/post/' + post.id} key={post.id}>
+                                {post.title}
+                            </Link>
+                        </div>
+                        <div className='item'>[{post.commentCnt}]</div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

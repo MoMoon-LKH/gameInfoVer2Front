@@ -9,7 +9,7 @@ import RegisterTerms from './member/RegisterTerms';
 
 function App() {
 
-
+  
   return (
     <div className="App">
       <BrowserRouter>
