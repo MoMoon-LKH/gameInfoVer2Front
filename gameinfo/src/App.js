@@ -6,13 +6,15 @@ import PostDetail from './post/PostDetail';
 import Login from './auth/Login';
 import Register from './member/Register';
 import RegisterTerms from './member/RegisterTerms';
+import { AuthProvider } from './auth/AuthContext';
 
 function App() {
-
   
   return (
+  
+  <AuthProvider>
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter>  
         <Header/>
         <div className='content-body'>
           <Routes>
@@ -23,9 +25,11 @@ function App() {
             <Route path='/register' element={<Register/>}></Route>
           </Routes>
         </div>
-      </BrowserRouter>
+      </BrowserRouter>  
     </div>
+  </AuthProvider>    
   );
+  
 }
 
 export default App;

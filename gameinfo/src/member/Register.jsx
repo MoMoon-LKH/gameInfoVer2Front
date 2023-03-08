@@ -3,8 +3,11 @@ import './Register.css'
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import backUrl from './../config/ApiUrl';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const [loginId, setLoginId] = useState("");
     const [pwd, setPwd] = useState("");
@@ -27,8 +30,9 @@ const Register = () => {
     const [authNumMsg, setAuthNumMsg] = useState("");
 
     const confirmId = () => {
+        console.log(loginId)
         if(loginId.length < 5) {
-            setLoginId("최소 5자 이상 입력해주세요");
+            setLoginIdMsg("최소 5자 이상 입력해주세요");
         } else {
             axios.get(backUrl + "/members/duplicate-loginId?loginId=" + loginId)
             .then(response => {
@@ -120,6 +124,7 @@ const Register = () => {
 
 
     useEffect(() => {
+        setBoolId(false)
         if(loginId.length < 5) {
             setLoginIdMsg("최소 5자 이상 입력해주세요")
         } else {
@@ -145,24 +150,34 @@ const Register = () => {
         if(!boolId) {
             bool = false;
             alert('아이디 중복확인 해주세요')
-        }
-        if(!boolPwd || !boolConfirmPwd) {
+        }else if(!boolPwd || !boolConfirmPwd) {
             bool = false;
             alert('비밀번호를 확인해주세요')
-        }
-        if(!boolAuthNum) {
+        }else if(!boolAuthNum) {
             bool = false;
             alert('이메일 인증을 해주세요')
         }
 
         if(bool){
-            alert(JSON.stringify(registerInfo))
             ajaxRegister(registerInfo);
         }
     }
 
     const ajaxRegister = (info) => {
-        
+
+        axios.post(backUrl + "/members/register", info)
+        .then(response => {
+            alert("회원가입이 완료되었습니다")
+            navigate('/')
+
+        })
+        .catch(error => {
+            const data = error.response.data;
+            
+            if(data.status === 409) {
+                alert(data.message)
+            }
+        })
     }
 
 

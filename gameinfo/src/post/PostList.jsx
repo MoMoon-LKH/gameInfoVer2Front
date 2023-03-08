@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostDetail from './PostDetail';
 import './PostList.css';
+import { useContext } from 'react';
+import AuthContext from '../auth/AuthContext';
+import useAuth from './../auth/useAuth';
 
 const PostList = (props) => {
     
@@ -12,7 +15,6 @@ const PostList = (props) => {
         {id: 3, title: 'title3', commentCnt: 4}
     ];
     let [list, setList] = useState(example);
-
 
     return (
         <div className='post-list'>
