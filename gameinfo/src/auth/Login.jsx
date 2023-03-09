@@ -3,8 +3,9 @@ import './Login.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import backUrl from './../config/ApiUrl';
 import useAuth from './useAuth';
+import {backUrl, customAxios} from './../config/ApiUrl';
+
 
 const Login = () => {
 
@@ -39,6 +40,8 @@ const Login = () => {
             })
             .then(response => {
                 const data = response.data;
+                setAuth(response.data);
+                navigate("/")
             })
             .catch(error => {
                 const data = error.response.data;

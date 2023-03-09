@@ -30,7 +30,6 @@ const Register = () => {
     const [authNumMsg, setAuthNumMsg] = useState("");
 
     const confirmId = () => {
-        console.log(loginId)
         if(loginId.length < 5) {
             setLoginIdMsg("최소 5자 이상 입력해주세요");
         } else {

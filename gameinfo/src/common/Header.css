@@ -4,13 +4,22 @@
     margin: 10px;
     justify-content: space-between;
     border-bottom: 1px solid black;
+    flex-grow: 2;
   }
   
 .header-item {
-  flex-basis: 100px;
+  flex-basis: 200px;
   text-align: center;
   margin: 20px;
+  display: flex;
+  
 }
+
+.header-sub {
+  margin-right: 20px;
+}
+
+
 
 .logo {
   font-size: 25px;
