@@ -40,7 +40,7 @@ const Login = () => {
             })
             .then(response => {
                 const data = response.data;
-                setAuth(response.data);
+                localStorage.setItem('gameinfo', JSON.stringify(data));
                 navigate("/")
             })
             .catch(error => {
@@ -49,6 +49,12 @@ const Login = () => {
                     alert(data.message)
                 }
             })
+        }
+    }
+
+    const handleEnter = (event) => {
+        if(event.keyCode === 13) {
+            loginApi()
         }
     }
 
@@ -61,12 +67,12 @@ const Login = () => {
             <div className='login-content'>
                 <div className='login-item'>
                     <div className='login-label'>아이디</div>
-                    <input id='loginId' className='login-input' type={'text'} placeholder='ID' onChange={e => setId(e.target.value)}/>
+                    <input id='loginId' className='login-input' type={'text'} placeholder='ID' onChange={e => setId(e.target.value)} onKeyUp={e => handleEnter(e)}/>
                     <div className='check-msg'>{idMsg}</div>
                 </div>
                 <div className='login-item'>
                     <div className='login-label'>비밀번호</div>
-                    <input id='password' className='login-input' type={'password'} placeholder='PASSWORD' onChange={e => setPwd(e.target.value)}/>
+                    <input id='password' className='login-input' type={'password'} placeholder='PASSWORD' onChange={e => setPwd(e.target.value)} onKeyUp={e => handleEnter(e)}/>
                     <div className='check-msg'>{pwdMsg}</div>
                 </div>
                 <div className='login-item'>

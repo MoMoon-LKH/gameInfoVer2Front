@@ -7,6 +7,7 @@ import Login from './auth/Login';
 import Register from './member/Register';
 import RegisterTerms from './member/RegisterTerms';
 import { AuthProvider } from './auth/AuthContext';
+import Home from './Home';
 
 function App() {
   
@@ -18,7 +19,7 @@ function App() {
         <Header/>
         <div className='content-body'>
           <Routes>
-            <Route exact path='/' element={<PostList/>}></Route>
+            <Route exact path='/' element={<Home/>}></Route>
             <Route path='/post/:postId' element={<PostDetail/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/register/terms' element={<RegisterTerms/>}></Route>

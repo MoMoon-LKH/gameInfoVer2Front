@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './Register.css'
 import { useState, useCallback } from 'react';
 import axios from 'axios';
-import backUrl from './../config/ApiUrl';
+import {backUrl} from './../config/ApiUrl';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -35,12 +35,14 @@ const Register = () => {
         } else {
             axios.get(backUrl + "/members/duplicate-loginId?loginId=" + loginId)
             .then(response => {
-                if(response.data) {
-                    setBoolId(false)
-                    setLoginIdMsg("중복되는 아이디가 있습니다")
-                } else {
+                    
                     setBoolId(true)
                     setLoginIdMsg("사용가능한 아이디입니다")
+            })
+            .catch(error => {
+                if(error.response.data.status == 409) {
+                    setBoolId(false)
+                    setLoginIdMsg("중복되는 아이디가 존재합니다")
                 }
             })
         }
@@ -92,6 +94,10 @@ const Register = () => {
             .catch(error => {
                 if(error.response.data.status == 400) {
                     setAuthNumMsg(error.response.data.message)
+                }
+
+                if(error.resopnse.data.status == 404) {
+                    setAuthNumMsg('재전송 후 인증해주시길 바랍니다')
                 }
             })
         } else {
@@ -167,7 +173,7 @@ const Register = () => {
         axios.post(backUrl + "/members/register", info)
         .then(response => {
             alert("회원가입이 완료되었습니다")
-            navigate('/')
+            navigate('/login')
 
         })
         .catch(error => {

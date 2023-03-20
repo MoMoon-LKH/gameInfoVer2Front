@@ -9,13 +9,21 @@ import customAxios from '../config/ApiUrl';
 
 const Header = () => {
 
-    const {auth, setAuth} = useAuth()
     const navigate = useNavigate()
+    const auth = JSON.parse(localStorage.getItem('gameinfo'))
 
     const logout = () => {
-        customAxios.post("/auth/logout")
-        .then(resopnse => {
-            setAuth(null)
+        customAxios.post("/auth/logout",{},
+        {
+            headers: {Authorization: auth.accessToken}
+        })
+        .then(response => {
+            alert(response.data.message)
+            localStorage.removeItem('gameinfo')
+            window.location.reload()
+        })
+        .catch(error => {
+            
         })
     
     }
@@ -32,6 +40,8 @@ const Header = () => {
 
         {auth == null ? 
             <div className='header-item'>
+                <div className='header-sub'>
+                </div>
                 <div className='header-sub'>
                     <Link to={'/login'}><button className='login-btn'>로그인</button></Link>
                 </div>
