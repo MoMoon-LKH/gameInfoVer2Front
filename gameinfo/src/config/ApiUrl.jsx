@@ -1,28 +1,28 @@
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-export const backUrl = "https://gameinfo.momoon.kro.kr/api";
+//export const backUrl = "https://gameinfo.momoon.kro.kr/api";
+export const backUrl = "http://localhost:8080/api";
 
-const customAxios = axios.create({
+export const customAxios = axios.create({
     baseURL: backUrl,
-    withCredentials: true
 })
 
 async function refreshAccessToken() {
 
-    let token = null
-
-    customAxios.post("/auth/reissue-token")
-    .then(response => {
+    try {
+        const memberId = JSON.parse(localStorage.getItem('gameinfo')).member.id
+        const response = await customAxios.post("/auth/reissue-token", {id: memberId}, {
+            withCredentials: true
+        })
         localStorage.removeItem('gameinfo')
         localStorage.setItem('gameinfo', JSON.stringify(response.data))
-        token = response.data.accessToken
-    })
-    .catch(error => {
+        return response.data.accessToken
+    } catch (error) {
         localStorage.removeItem('gameinfo')
-    })
+        throw error
+    }
 
-    return token
 }
 
 customAxios.interceptors.request.use(
@@ -46,19 +46,17 @@ customAxios.interceptors.response.use(
         return response
     },
     async (error) => {
-        const original = error.config
         const response = error.response
-        
 
-        if((response.status === 401 || response.status === 403) && !original._retry) {
+        if((response.status === 401 || response.status === 403) && !error.config._retry) {
             
-            original._retry = true
+            error.config._retry = true
 
-            const token = await refreshAccessToken();
+            let token = await refreshAccessToken();
 
-            original.headers.Authorization = token
+            error.config.headers.Authorization = token
 
-            return axios(original)
+            return axios(error.config)
         }
         const navigate = useNavigate()
         localStorage.removeItem('gameinfo')

@@ -18,7 +18,6 @@ const Header = () => {
             headers: {Authorization: auth.accessToken}
         })
         .then(response => {
-            alert(response.data.message)
             localStorage.removeItem('gameinfo')
             window.location.reload()
         })

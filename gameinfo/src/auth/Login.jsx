@@ -37,6 +37,8 @@ const Login = () => {
             {
                 loginId: id,
                 password: pwd
+            }, {
+                withCredentials: true
             })
             .then(response => {
                 const data = response.data;
