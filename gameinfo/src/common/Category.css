@@ -1,0 +1,23 @@
+
+.category-nav {
+   border-bottom: 1px solid black;
+   border-top: 1px solid black;
+   display: flex;
+   justify-content: space-evenly;
+   margin: 10px;
+}
+
+.category-div {
+    width: 100%;
+}
+
+.category-text {
+    margin: 10px;
+    font-weight: bold;
+}
+
+.category-div:hover {
+    color: white;
+    background-color: gray;
+    cursor: pointer;
+}

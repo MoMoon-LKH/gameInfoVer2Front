@@ -1,4 +1,5 @@
-import PostList from "./post/PostList"
+import HomePostList from "./post/HomePostList"
+import './Home.css'
 
 const Home = () => {
 
@@ -6,13 +7,17 @@ const Home = () => {
     return(
         <div className="home">
 
-            <div className="post-list">
-                <div>뉴스</div> 
-                <PostList/>
+            <div className="home-list">
+                <div className="post-bar">
+                    <div className="post-bar-text">뉴스</div>    
+                </div> 
+                <HomePostList />
             </div>
-            <div className="post-list">
-                <div>리뷰</div> 
-                <PostList/>
+            <div className="home-list">
+                <div className="post-bar">
+                    <div className="post-bar-text">리뷰</div>    
+                </div> 
+                <HomePostList />
             </div>
         </div>
     )

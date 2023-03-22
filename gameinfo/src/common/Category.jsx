@@ -1,17 +1,25 @@
-
+import './Category.css'
 
 const Category = () => {
 
     return (
         <div className="category-nav">
             <div className="category-div">
-                뉴스
+                <div className='category-text'>
+                    뉴스
+                </div>
             </div>
+
             <div className="category-div">
-                Games
+                <div className='category-text'>
+                    Games
+                </div>
             </div>
+            
             <div className="category-div">
-                리뷰
+                <div className='category-text'>
+                    리뷰
+                </div>
             </div>
         </div>
     )

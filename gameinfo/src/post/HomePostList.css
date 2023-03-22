@@ -1,0 +1,41 @@
+.post-list{
+    width: 100%;
+    margin: auto;
+}
+
+.post-lists {
+    display: inline-block;    
+    vertical-align: top;
+    text-align: left;
+    width: 50%;
+}
+
+.item {
+    display: inline-block;
+}
+
+.post-item {
+    margin: 10px;
+    color: black;
+    font-size: 20px;
+    width: 90%;
+    white-space: nowrap;
+}
+
+.title-a {
+    color: black;
+}
+
+.title-a:hover {
+    color: gray;
+}
+
+.item {
+    width: 100%;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.item-title {
+    text-overflow: ellipsis;
+}

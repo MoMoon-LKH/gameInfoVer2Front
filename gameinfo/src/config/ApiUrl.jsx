@@ -58,6 +58,7 @@ customAxios.interceptors.response.use(
 
             return axios(error.config)
         }
+        
         const navigate = useNavigate()
         localStorage.removeItem('gameinfo')
         alert('다시 로그인 후 시도해주세요')

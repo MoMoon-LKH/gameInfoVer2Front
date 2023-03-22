@@ -8,6 +8,7 @@ import Register from './member/Register';
 import RegisterTerms from './member/RegisterTerms';
 import { AuthProvider } from './auth/AuthContext';
 import Home from './Home';
+import Category from './common/Category';
 
 function App() {
   
@@ -17,9 +18,11 @@ function App() {
     <div className="App">
       <BrowserRouter>  
         <Header/>
+        <Category/>
         <div className='content-body'>
           <Routes>
             <Route exact path='/' element={<Home/>}></Route>
+            <Route path='/list/post/:categoryId'></Route>
             <Route path='/post/:postId' element={<PostDetail/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/register/terms' element={<RegisterTerms/>}></Route>

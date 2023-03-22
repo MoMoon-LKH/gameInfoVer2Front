@@ -1,0 +1,18 @@
+.home {
+    margin: auto;
+    width: 80%;
+}
+
+.home-list {
+    margin: 50px auto;
+    border: 1px solid gray;
+}
+
+.post-bar {
+    text-align: left;
+    padding: 10px;
+    background-color: lightgray;
+    border-bottom: 1px solid gray;
+    font-weight: bold;
+    font-size: 17px;
+}
