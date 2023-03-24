@@ -1,5 +1,6 @@
 import HomePostList from "./post/HomePostList"
 import './Home.css'
+import { Link } from "react-router-dom"
 
 const Home = () => {
 
@@ -19,6 +20,7 @@ const Home = () => {
                 </div> 
                 <HomePostList />
             </div>
+            <Link to={'/post/create'}><button>작성</button></Link>
         </div>
     )
 }
