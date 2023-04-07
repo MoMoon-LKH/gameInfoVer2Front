@@ -4,13 +4,22 @@
     margin: auto;
 }
 
-.post-title {
+.post-sub-div {
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.post-sub-divs {
+    width: 100%;
+    padding: 10px;
     text-align: left;
+    margin-left: 10px;
 }
 
 input {
-    width: 40%;
-    height: 65%;
+    width: 50%;
+    font-size: 14px;
+    padding: 5px;
 }
 
 .button-div{
@@ -38,4 +47,9 @@ button {
 
 .cancel-btn {
      
+}
+
+.category-select {
+    width: 6%;
+    padding: 5px;
 }

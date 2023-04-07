@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-//export const backUrl = "https://gameinfo.momoon.kro.kr/api";
-export const backUrl = "http://localhost:8080/api";
+export const backUrl = "https://gameinfo.momoon.kro.kr/api";
+//export const backUrl = "http://localhost:8080/api";
 
 export const customAxios = axios.create({
     baseURL: backUrl,
