@@ -1,8 +1,9 @@
 import { useState } from "react"
 import "./CreatePost.css"
-import CreateEditor from "./CreateEditor"
-import { CKEditor } from "@ckeditor/ckeditor5-react"
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
+import { customAxios } from './../config/ApiUrl';
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import { CKEditor} from '@ckeditor/ckeditor5-react'
+
 
 const CreatePost = (props) => {
 
@@ -41,13 +42,38 @@ const CreatePost = (props) => {
         
     }
 
-    const handleSetImages = (content) => {
-        setContent(content);
+ 
+    
+    const customUploadAdapter = (loader) => { 
+        return {
+            upload(){
+                return new Promise ((resolve, reject) => {
+                    const data = new FormData();
+                     loader.file.then( async (file) => {
+                            data.append("file", file);
+
+                            const response = await customAxios.post('/image/upload', data)
+                                .then((res) => {
+                                    setImages(images.concat(res.data.id))
+                                
+                                    resolve({
+                                        default: 'https://gameinfo.momoon.kro.kr/images/' + res.data.fileName
+                                    });
+                                })
+                                .catch((err)=>reject(err));
+                        })
+                })
+            }
+        }
     }
 
-    const handleSetContent = (id) => {
-        setImages(images.concat(id))
+
+    function uploadPlugin (editor){
+        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+            return customUploadAdapter(loader);
+        }
     }
+
 
 
     return (
@@ -65,7 +91,41 @@ const CreatePost = (props) => {
                         <input className="post-title-input" placeholder="제목을 입력해주세요" onChange={e => setTitle(e.target.value)}></input>
                     </div>
                 </div>
-                <CreateEditor content={content} handleSetImages={handleSetImages} handleSetContent={handleSetContent}/>
+                <CKEditor className='editor'
+                    editor={ Editor }
+                    config={{
+                        placeholder: "내용을 입력해주세요",
+                        image: {
+                            toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight'],
+                            styles: [
+                            'full',
+                            'alignLeft',
+                            'alignRight'
+                            ],
+                        },
+                        extraPlugins: [uploadPlugin]
+                    
+                    }}
+
+                    data={content}
+
+
+                    onReady={ editor => {
+                        // You can store the "editor" and use when it is needed.
+                        console.log( 'Editor is ready to use!', editor );
+                    } }
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        //handleContent(data)
+                        setContent(data)
+                    } }
+                    onBlur={ ( event, editor ) => {
+                        console.log( 'Blur.', editor );
+                    } }
+                    onFocus={ ( event, editor ) => {
+                        console.log( 'Focus.', editor );
+                    } }
+                />
             </div>
             <div className="button-div">
                 <button className="create-btn" onClick={onClickCreate}>작성</button>
