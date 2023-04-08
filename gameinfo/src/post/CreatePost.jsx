@@ -3,15 +3,20 @@ import "./CreatePost.css"
 import { customAxios } from './../config/ApiUrl';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor} from '@ckeditor/ckeditor5-react'
+import { useNavigate } from "react-router-dom";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
 
 
 const CreatePost = (props) => {
-
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [category, setCategory] = useState("")
     const [images, setImages] = useState({})
+    const [isOpen, setIsOpen] = useState(false);
+    const naviagte = useNavigate();
+
 
     const handleCategory = (e) => {
         setCategory(e.target.value)
@@ -22,7 +27,9 @@ const CreatePost = (props) => {
         
         const post = {
             title: title,
-            content: content
+            content: content,
+            imageIds: images,
+            categoryId: category
         }
 
         if(category === "") {
@@ -32,14 +39,23 @@ const CreatePost = (props) => {
         } else if(post.content === "") {
             alert("해당 게시글 내용을 입력해주세요")
         } else {
-            
-        } 
+            alert(post)
+        }
 
-        console.log(post)
+        
     }
 
-    const onClickCancel = () => {
-        
+    const modalOk = () => {
+        setIsOpen(false)
+        naviagte(-1)
+    }
+
+    const modalCancel = () => {
+        setIsOpen(false)
+    }
+
+    const onClickCancel = () => { 
+        setIsOpen(true)
     }
 
  
@@ -73,7 +89,6 @@ const CreatePost = (props) => {
             return customUploadAdapter(loader);
         }
     }
-
 
 
     return (
@@ -128,10 +143,29 @@ const CreatePost = (props) => {
                 />
             </div>
             <div className="button-div">
-                <button className="create-btn" onClick={onClickCreate}>작성</button>
-                <button className="cancel-btn" onClick={onClickCancel}>취소</button>
+                <button className="btns create-btn" onClick={onClickCreate}>작성</button>
+                <button className="btns cancel-btn" onClick={onClickCancel}>취소</button>
             </div>
+
+            <Modal
+                show={isOpen}         
+                backdrop="static"
+                keyboard={false}
+                className='modal'>
+                <Modal.Body>
+                            해당 내용은 저장되지않습니다<br/>
+                            정말로 취소하겠습니다?                
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className="modal-btn" variant="primary" onClick={modalOk}>확인</Button>
+                    <Button className="modal-btn" variant="secondary" onClick={modalCancel} >취소</Button>
+                </Modal.Footer>
+            </Modal>
+            
         </div>
+
+
+
     )
 }
 

@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+.category-text:hover {
+    color: white
+}
+
 a {
     color: black;
 }

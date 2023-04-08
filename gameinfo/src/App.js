@@ -10,6 +10,9 @@ import { AuthProvider } from './auth/AuthContext';
 import Home from './Home';
 import Category from './common/Category';
 import CreatePost from './post/CreatePost';
+import 'bootstrap/dist/css/bootstrap.css';
+
+
 
 function App() {
   
