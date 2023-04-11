@@ -1,6 +1,5 @@
 .header-nav {
     display: flex;
-    text-align: right;
     margin: 10px;
     justify-content: space-between;
     flex-grow: 2;
@@ -9,7 +8,7 @@
 .header-item {
   flex-basis: 200px;
   text-align: center;
-  margin: 20px;
+  margin: 3px 15px 3px 15px;
   display: flex;
   
 }

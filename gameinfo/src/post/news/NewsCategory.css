@@ -1,0 +1,26 @@
+.news-categorys {
+    margin: 20px;
+    text-align: left;
+}
+
+.news-category-div {
+    display: inline-block;
+    padding: 2px 10px 3px;
+    font-size: 13px;
+    color: lightgray;
+    
+}
+
+.news-category-div:hover {
+    color: lightgray;
+}
+
+.active {
+    color: white;
+    background-color: #6d6d6d;;
+    border-radius: 10px;
+}
+
+.news-category-link:hover {
+    color: lightgray;
+}

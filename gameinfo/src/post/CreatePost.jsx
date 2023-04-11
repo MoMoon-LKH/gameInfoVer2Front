@@ -102,7 +102,7 @@ const CreatePost = (props) => {
                         </select>
                     </div>
                     <div className="post-sub-divs">
-                        <span className="post-title-text">제목: </span> 
+                        <span className="post-title-text">제목 </span> 
                         <input className="post-title-input" placeholder="제목을 입력해주세요" onChange={e => setTitle(e.target.value)}></input>
                     </div>
                 </div>
