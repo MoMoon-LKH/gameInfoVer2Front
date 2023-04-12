@@ -29,3 +29,16 @@
     margin-right: 10px;
 }
 
+.posts-table {
+    border-top: 1px solid lightgray;
+    table-layout: fixed;
+}
+
+.posts-table-body {
+    
+    font-size: 15px;
+}
+
+.posts-pagination {
+    text-align: center;
+}

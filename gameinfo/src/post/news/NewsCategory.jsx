@@ -5,8 +5,6 @@ const NewsCategory = (props) => {
 
     const activeId = props.id
 
-    console.log(activeId)
-
     return (
         <div className='news-categorys'>
             <div className={activeId == 1 ? 'news-category-div active' : 'news-category-div'}>
