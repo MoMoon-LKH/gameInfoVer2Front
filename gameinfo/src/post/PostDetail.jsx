@@ -3,23 +3,39 @@ import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 import './PostDetail.css'
 import {AiOutlineLike, AiOutlineDislike, AiFillLike, AiFillDislike} from 'react-icons/ai';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import customAxios from '../config/ApiUrl';
 
 const PostDetail = (props) => {
     
     const {postId} = useParams();
+    const [post, setPost] = useState({});
 
-    const post = {
-        title: '포스트 타이틀',
-        content: '주의 <div>sdf</div>',
-        commentCnt: 23,
-        memberId: '1',
-        nickname: '작성자',
-        view: 15,
-        likes: 0,
-        dislikes: 0,
-        createDate: '2023-02-20 13:50:00'
+    // const post = {
+    //     title: '포스트 타이틀',
+    //     content: '주의 <div>sdf</div>',
+    //     commentCnt: 23,
+    //     memberId: '1',
+    //     nickname: '작성자',
+    //     view: 15,
+    //     likes: 0,
+    //     dislikes: 0,
+    //     createDate: '2023-02-20 13:50:00'
+    // }
+
+    const ajaxPostDetail = (postId) => {
+        customAxios.get('/post/' + postId)
+        .then(response => {
+            if(response.status === 200){
+                setPost(response.data)
+            }
+        })
     }
+
+    useEffect(() => {
+        ajaxPostDetail(postId)
+    }, [])
 
     return (
         <div>

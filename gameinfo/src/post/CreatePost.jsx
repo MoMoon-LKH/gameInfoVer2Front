@@ -13,7 +13,7 @@ const CreatePost = (props) => {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [category, setCategory] = useState("")
-    const [images, setImages] = useState({})
+    const [images, setImages] = useState([])
     const [isOpen, setIsOpen] = useState(false);
     const naviagte = useNavigate();
 
@@ -23,13 +23,14 @@ const CreatePost = (props) => {
     }
 
 
+
     const onClickCreate = () => {
         
         const post = {
             title: title,
             content: content,
             imageIds: images,
-            categoryId: category
+            //categoryId: category
         }
 
         if(category === "") {
@@ -39,7 +40,7 @@ const CreatePost = (props) => {
         } else if(post.content === "") {
             alert("해당 게시글 내용을 입력해주세요")
         } else {
-            alert(post)
+            ajaxCraeetPost(post)
         }
 
         
@@ -56,6 +57,23 @@ const CreatePost = (props) => {
 
     const onClickCancel = () => { 
         setIsOpen(true)
+    }
+
+    const ajaxCraeetPost = (post) => {
+        
+        const response = customAxios.post('/post/create', post)
+        .then(response => {
+            if(response.status === 201) {
+                alert("등록되었습니다")
+                naviagte("/post/" + response.data.id)
+
+            } else {
+                alert("등록에 실패하였습니다")
+            }
+        }).catch(error => {
+            alert("등록에 실패하였습니다")
+        })
+        
     }
 
  
@@ -99,6 +117,12 @@ const CreatePost = (props) => {
                         <span style={{marginRight: '8px'}}>분류</span>
                         <select className="category-select" value={category} onChange={handleCategory}>
                             <option value={""}>선택</option>
+                            <option value={4}>PS5</option>
+                            <option value={5}>SWITCH</option>
+                            <option value={6}>XBOX</option>
+                            <option value={7}>PC</option>
+                            <option value={8}>모바일</option>
+                            <option value={9}>MULTI</option>
                         </select>
                     </div>
                     <div className="post-sub-divs">

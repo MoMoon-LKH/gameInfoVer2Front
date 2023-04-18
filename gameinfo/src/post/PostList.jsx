@@ -9,6 +9,7 @@ import { Table } from 'react-bootstrap';
 import NewsCategory from './news/NewsCategory';
 import { Pagination } from 'react-bootstrap';
 import CustomPagination from './page/CustomPagination';
+import customAxios from '../config/ApiUrl';
 
 const PostList = (props) => {
 
@@ -17,8 +18,9 @@ const PostList = (props) => {
     const perPage = 20
     const [page, setPage] = useState(1)
     const [offset, setOffset] = useState(0)
-    const [lastNum, setLastNum] = useState(1)
     let pageList = []
+    const [searchSelect, setSearchSelect] = useState('title')
+    const [searchInput, setSearchInput] = useState('')
 
     const example = {
         posts: [
@@ -31,11 +33,22 @@ const PostList = (props) => {
 
    
     const getListApi = async () => {
-
+        customAxios.get("/post/list/" + categoryId, {
+            params: {
+                page: page,
+                offset: offset,
+                searchSelect: searchSelect,
+                searchInput: searchInput,
+                size: perPage
+            }
+        })
+        .then(response => {
+            
+        })
     }
 
     useEffect(() => {
-        //api
+        
         setList(example.posts)
         
         
@@ -44,6 +57,10 @@ const PostList = (props) => {
     const onClickPagenation = (selectPage) => {
         setOffset((selectPage-1)*perPage)
     
+    }
+
+    const handleSearchSelect = (e) => {
+        setSearchSelect(e.target.value)
     }
 
 
@@ -68,7 +85,10 @@ const PostList = (props) => {
                             <tr>
                                 <td>{post.id}</td>
                                 <td></td>
-                                <td style={{textAlign: 'left'}}>{post.title}</td>
+                                <td style={{textAlign: 'left'}}>
+                                    
+                                    {post.title}
+                                </td>
                                 <td>{post.nickname}</td>
                                 <td>{post.createDate}</td>
                                 <td>{post.view}</td>
@@ -80,7 +100,13 @@ const PostList = (props) => {
             </div>
             <CustomPagination total={example.total} page={page} setPage={setPage} perPage={perPage} lastNum={Math.ceil(example.total/perPage)} />
             <div className='posts-search-div' style={{textAlign: 'right'}}>
-                <input type='text' style={{width: '20%'}}/> <button>검색</button>
+                <select value={searchSelect} onChange={handleSearchSelect} style={{width: '7%', height: '30px'}}>
+                    <option value={'title'}>제목</option>
+                    <option value={'writer'}>작성자</option>
+
+                </select>
+                <input type='text' style={{width: '18%', height: '30px'}}/> 
+                <button style={{width: '5%', height: '30px'}} onChange={e => setSearchInput(e.target.value)}>검색</button>
             </div>
 
         </div>

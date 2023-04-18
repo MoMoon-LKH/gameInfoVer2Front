@@ -1,5 +1,3 @@
-
-import { useEffect } from 'react';
 import { Pagination } from 'react-bootstrap';
 
 const CustomPagination = ({total, offset, page, setPage, lastNum}) => {
@@ -8,9 +6,6 @@ const CustomPagination = ({total, offset, page, setPage, lastNum}) => {
     const mod = Math.floor(page / perPaging) * perPaging
     const pageList = []    
 
-    console.log(lastNum)
-    console.log(mod)
-    console.log(mod + perPaging > lastNum)
     if(mod + perPaging > lastNum){
         for(let num = 0; num <= lastNum%10; num++) {
             pageList.push(mod + num)
