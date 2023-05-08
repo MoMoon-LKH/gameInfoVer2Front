@@ -22,5 +22,6 @@
 }
 
 .news-category-link:hover {
+    cursor: pointer;
     color: lightgray;
 }

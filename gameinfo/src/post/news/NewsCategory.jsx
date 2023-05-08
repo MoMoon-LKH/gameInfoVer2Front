@@ -1,46 +1,52 @@
-import { Link } from 'react-router-dom'
 import './NewsCategory.css'
+import { useState } from 'react';
 
 const NewsCategory = (props) => {
 
-    const activeId = props.id
+    const [activeId, setActiveId] = useState(props.id);
+    const getListApi = props.getListApi;
+
+    const listApi = (id) => {
+        setActiveId(id)
+        getListApi(id)
+    }
 
     return (
         <div className='news-categorys'>
-            <div className={activeId == 1 ? 'news-category-div active' : 'news-category-div'}>
-                <Link className='news-category-link' to={"/list/post/1"} >
+            <div className={activeId == 0 ? 'news-category-div active' : 'news-category-div'}>
+                <div className='news-category-link' onClick={()=>listApi(0)} >
                     전체
-                </Link>
+                </div>
+            </div>
+            <div className='news-category-div'>|</div>
+            <div className={activeId == 1 ? 'news-category-div active' : 'news-category-div'}>
+                <div className='news-category-link' onClick={()=>listApi(1)}>
+                    PS5
+                </div>
+            </div>
+            <div className='news-category-div'>|</div>
+            <div className={activeId == 2 ? 'news-category-div active' : 'news-category-div'}>
+                <div className='news-category-link' onClick={()=>listApi(2)}>
+                    SWITCH
+                </div>
+            </div>
+            <div className='news-category-div'>|</div>
+            <div className={activeId == 3 ? 'news-category-div active' : 'news-category-div'}>
+                <div className='news-category-link' onClick={()=>listApi(3)}>
+                    XBOX
+                </div>
             </div>
             <div className='news-category-div'>|</div>
             <div className={activeId == 4 ? 'news-category-div active' : 'news-category-div'}>
-                <Link className='news-category-link' to={"/list/post/4"}>
-                    PS5
-                </Link>
+                <div className='news-category-link' onClick={()=>listApi(4)}>
+                    PC
+                </div>
             </div>
             <div className='news-category-div'>|</div>
             <div className={activeId == 5 ? 'news-category-div active' : 'news-category-div'}>
-                <Link className='news-category-link' to={"/list/post/5"}>
-                    SWITCH
-                </Link>
-            </div>
-            <div className='news-category-div'>|</div>
-            <div className={activeId == 6 ? 'news-category-div active' : 'news-category-div'}>
-                <Link className='news-category-link' to={"/list/post/6"}>
-                    XBOX
-                </Link>
-            </div>
-            <div className='news-category-div'>|</div>
-            <div className={activeId == 7 ? 'news-category-div active' : 'news-category-div'}>
-                <Link className='news-category-link' to={"/list/post/7"}>
-                    PC
-                </Link>
-            </div>
-            <div className='news-category-div'>|</div>
-            <div className={activeId == 8 ? 'news-category-div active' : 'news-category-div'}>
-                <Link className='news-category-link' to={"/list/post/8"}>
+                <div className='news-category-link' onClick={()=>listApi(5)}>
                     모바일
-                </Link>
+                </div>
             </div>
         </div>
     )

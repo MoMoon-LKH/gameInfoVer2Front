@@ -22,7 +22,7 @@ const Category = () => {
                     onMouseOver={showDorpdown}
                     onMouseOut={hideDropdown}>
                     <Link className='category-link' 
-                        to="/list/post/1">
+                        to="/list/news/0">
                         <div className='category-text'>
                             뉴스
                         </div>
@@ -32,7 +32,7 @@ const Category = () => {
 
                 <div className="category-div">
                     <Link className='category-link' 
-                            to="/list/post/2">
+                            to="">
                         <div className='category-text'>
                             리뷰
                         </div>
@@ -41,7 +41,7 @@ const Category = () => {
 
                 <div className="category-div">
                     <Link className='category-link'
-                        to="/list/post/3">
+                        to="">
                         <div className='category-text'>
                             Games
                         </div>
@@ -57,7 +57,7 @@ const Category = () => {
                 <div className='drop-items'>
                     <div className='dropdown-news'>
                         <Link className='dropdown-link'
-                            to="/list/post/4">
+                            to="/list/news/1">
                             <div className='dropdown-item'>
                                 PS5
                             </div>
@@ -65,7 +65,7 @@ const Category = () => {
                     </div>
                     <div className='dropdown-news'>
                         <Link className='dropdown-link' 
-                            to="/list/post/5">
+                            to="/list/news/2">
                             <div className='dropdown-item'>
                                 SWITCH
                             </div>
@@ -73,7 +73,7 @@ const Category = () => {
                     </div>
                     <div className='dropdown-news'>
                         <Link className='dropdown-link' 
-                            to="/list/post/6">
+                            to="/list/news/3">
                             <div className='dropdown-item'>
                                 XBOX
                             </div>
@@ -81,7 +81,7 @@ const Category = () => {
                     </div>
                     <div className='dropdown-news'>
                         <Link className='dropdown-link' 
-                            to="/list/post/7">
+                            to="/list/news/4">
                             <div className='dropdown-item'>
                                 PC
                             </div>
@@ -89,7 +89,7 @@ const Category = () => {
                     </div>
                     <div className='dropdown-news'>
                         <Link className='dropdown-link' 
-                            to="/list/post/8"
+                            to="/list/news/5"
                             >
                             <div className='dropdown-item'>
                                 모바일

@@ -1,6 +1,6 @@
 import { useState } from "react"
-import "./CreatePost.css"
-import { customAxios } from './../config/ApiUrl';
+import "./CreateNews.css"
+import { customAxios } from '../config/ApiUrl';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor} from '@ckeditor/ckeditor5-react'
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
 
 
-const CreatePost = (props) => {
+const CreateNews = (props) => {
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
@@ -61,7 +61,7 @@ const CreatePost = (props) => {
 
     const ajaxCraeetPost = (post) => {
         
-        const response = customAxios.post('/post/create', post)
+        const response = customAxios.post('/news/create', post)
         .then(response => {
             if(response.status === 201) {
                 alert("등록되었습니다")
@@ -193,5 +193,5 @@ const CreatePost = (props) => {
     )
 }
 
-export default CreatePost
+export default CreateNews
 

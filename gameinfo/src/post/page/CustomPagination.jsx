@@ -20,8 +20,8 @@ const CustomPagination = ({total, offset, page, setPage, lastNum}) => {
     return (
         <div className='posts-pagination' style={{display: 'flex', justifyContent: 'center'}}>
             <Pagination>
-                <Pagination.First onClick={() => setPage(1)} disabled={page === 1}/>
-                <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 1}/>
+                <Pagination.First onClick={() => setPage(1)} disabled={page === 0}/>
+                <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0}/>
                 {pageList.map((num) => (
                     <Pagination.Item key={num} onClick={() => setPage(num)} active={num === page}>
                         {num + 1}

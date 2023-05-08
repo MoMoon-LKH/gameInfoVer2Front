@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams} from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams} from 'react-router-dom';
 import PostDetail from './PostDetail';
 import './PostList.css';
 import { useContext } from 'react';
@@ -15,58 +15,50 @@ const PostList = (props) => {
 
     let [list, setList] = useState([])
     const {categoryId} = useParams() 
-    const perPage = 20
-    const [page, setPage] = useState(1)
-    const [offset, setOffset] = useState(0)
-    let pageList = []
+    const perPage = 30
+    const [page, setPage] = useState(0)
+    const [total, setTotal] = useState(0)
     const [searchSelect, setSearchSelect] = useState('title')
     const [searchInput, setSearchInput] = useState('')
+    const navigator = useNavigate();
 
-    const example = {
-        posts: [
-            {id: 1, title: 'title1', commentCnt: 1, view: 3,  memberId: 1, nickname: 'test', createDate: '2023-04-12', likes: 5},
-            {id: 2, title: 'title2', commentCnt: 5, view: 5, memberId: 1, nickname: 'test', createDate: '2023-04-12' , likes: 3},
-            {id: 3, title: 'title3', commentCnt: 4, view: 10, memberId: 1, nickname: 'test', createDate: '2023-04-12', likes: 2}
-        ],
-        total: 2300
-    }
-
-   
-    const getListApi = async () => {
-        customAxios.get("/post/list/" + categoryId, {
+    const getListApi = async (id) => {
+        customAxios.get("/news/list/" + id, {
             params: {
                 page: page,
-                offset: offset,
+                size: perPage,
                 searchSelect: searchSelect,
-                searchInput: searchInput,
-                size: perPage
+                searchInput: searchInput
             }
         })
         .then(response => {
-            
+            setTotal(response.data.total);
+            setList(response.data.list);
         })
     }
 
     useEffect(() => {
-        
-        setList(example.posts)
-        
-        
+        getListApi(categoryId)    
     }, [])
     
-    const onClickPagenation = (selectPage) => {
-        setOffset((selectPage-1)*perPage)
-    
-    }
 
     const handleSearchSelect = (e) => {
         setSearchSelect(e.target.value)
     }
 
+    const onClickCreateNews = () => {
+        
+        //권한 확인
+
+        //글작성 페이지로 이동
+        navigator("/news/create")
+        
+    }
+
 
     return (
         <div className='post-list'>
-            <NewsCategory id={categoryId}/>
+            <NewsCategory id={categoryId} getListApi={getListApi}/>
             <div className='posts'>
                 <Table className='posts-table'>
                     <thead>
@@ -86,8 +78,9 @@ const PostList = (props) => {
                                 <td>{post.id}</td>
                                 <td></td>
                                 <td style={{textAlign: 'left'}}>
-                                    
-                                    {post.title}
+                                    <Link to={"/news/" + post.id}>
+                                        {post.title}
+                                    </Link>
                                 </td>
                                 <td>{post.nickname}</td>
                                 <td>{post.createDate}</td>
@@ -98,7 +91,7 @@ const PostList = (props) => {
                     </tbody>
                 </Table>
             </div>
-            <CustomPagination total={example.total} page={page} setPage={setPage} perPage={perPage} lastNum={Math.ceil(example.total/perPage)} />
+            <CustomPagination total={total} page={page} setPage={setPage} perPage={perPage} lastNum={Math.ceil(total/perPage)} />
             <div className='posts-search-div' style={{textAlign: 'right'}}>
                 <select value={searchSelect} onChange={handleSearchSelect} style={{width: '7%', height: '30px'}}>
                     <option value={'title'}>제목</option>
@@ -107,6 +100,7 @@ const PostList = (props) => {
                 </select>
                 <input type='text' style={{width: '18%', height: '30px'}}/> 
                 <button style={{width: '5%', height: '30px'}} onChange={e => setSearchInput(e.target.value)}>검색</button>
+                <button style={{width: '7%', height: '30px', marginLeft: '10px'}} onClick={onClickCreateNews}>글 작성</button>
             </div>
 
         </div>

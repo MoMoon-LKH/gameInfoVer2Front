@@ -20,7 +20,7 @@ const HomePostList = (props) => {
                         return(
                             <div className='post-item' key={post.id}>
                                 <div className='item item-title'> 
-                                    <Link className='title-a' to={'/post/' + post.id} key={post.id}>
+                                    <Link className='title-a' to={'/news/' + post.id} key={post.id}>
                                         {post.title} [{post.commentCnt}]
                                     </Link>
                                 </div>
@@ -37,7 +37,7 @@ const HomePostList = (props) => {
                         return(
                             <div className='post-item' key={post.id}>
                                 <div className='item item-title'> 
-                                    <Link className='title-a' to={'/post/' + post.id} key={post.id}>
+                                    <Link className='title-a' to={'/news/' + post.id} key={post.id}>
                                         {post.title} [{post.commentCnt}]
                                     </Link>
                                 </div>

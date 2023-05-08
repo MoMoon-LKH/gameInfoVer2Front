@@ -9,7 +9,7 @@ import RegisterTerms from './member/RegisterTerms';
 import { AuthProvider } from './auth/AuthContext';
 import Home from './Home';
 import Category from './common/Category';
-import CreatePost from './post/CreatePost';
+import CreateNews from './post/CreateNews';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
@@ -26,9 +26,9 @@ function App() {
         <div className='content-body'>
           <Routes>
             <Route exact path='/' element={<Home/>}></Route>
-            <Route path='/list/post/:categoryId' element={<PostList/>}></Route>
-            <Route path='/post/:postId' element={<PostDetail/>}></Route>
-            <Route path='/post/create' element={<CreatePost/>}></Route>
+            <Route path='/list/news/:categoryId' element={<PostList/>}></Route>
+            <Route path='/news/:newsId' element={<PostDetail/>}></Route>
+            <Route path='/news/create' element={<CreateNews/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/register/terms' element={<RegisterTerms/>}></Route>
             <Route path='/register' element={<Register/>}></Route>
