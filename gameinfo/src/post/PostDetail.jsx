@@ -6,10 +6,12 @@ import {AiOutlineLike, AiOutlineDislike, AiFillLike, AiFillDislike} from 'react-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import customAxios from '../config/ApiUrl';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import Editor, { ClassicEditor } from 'ckeditor5-custom-build/build/ckeditor';
 
 const PostDetail = (props) => {
     
-    const {postId} = useParams();
+    const {newsId} = useParams();
     const [post, setPost] = useState({});
 
     // const post = {
@@ -24,8 +26,8 @@ const PostDetail = (props) => {
     //     createDate: '2023-02-20 13:50:00'
     // }
 
-    const ajaxPostDetail = (postId) => {
-        customAxios.get('/post/' + postId)
+    const ajaxPostDetail = async (id) => {
+        customAxios.get('/news/' + id)
         .then(response => {
             if(response.status === 200){
                 setPost(response.data)
@@ -34,8 +36,8 @@ const PostDetail = (props) => {
     }
 
     useEffect(() => {
-        ajaxPostDetail(postId)
-    }, [])
+        ajaxPostDetail(newsId)
+    }, [newsId])
 
     return (
         <div>
@@ -43,7 +45,7 @@ const PostDetail = (props) => {
             <div className='post-header'>
                     <div className='post-category'>category</div>
                     <div className='post-title'>
-                        {post.title} [{post.commentCnt}]
+                        {post.title}
                     </div>
                     <div className='post-header-sub'>
                         <div className='post-writer'>
@@ -60,7 +62,16 @@ const PostDetail = (props) => {
                     </div>
             </div>
             <div className='post-body'>
-                    <div dangerouslySetInnerHTML={{__html: post.content}}></div>
+                <CKEditor className='editor'
+                    editor={Editor}
+                    disabled={true}
+                    config={{
+                        toolbar: 'none',
+                        isReadOnly: true
+                    }}
+
+                    data={post.content}
+                />
             </div>
 
             <div className='post-likes-div'>
@@ -80,7 +91,7 @@ const PostDetail = (props) => {
             
             </div>
 
-            <Comment postId={postId}/>   
+            <Comment postId={newsId} type={'news'}/>   
         </div>
     );
 };

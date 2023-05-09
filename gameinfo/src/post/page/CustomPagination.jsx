@@ -3,7 +3,7 @@ import { Pagination } from 'react-bootstrap';
 const CustomPagination = ({total, offset, page, setPage, lastNum}) => {
 
     const perPaging = 10
-    const mod = Math.floor(page / perPaging) * perPaging
+    const mod = Math.floor(total / perPaging) * perPaging
     const pageList = []    
 
     if(mod + perPaging > lastNum){

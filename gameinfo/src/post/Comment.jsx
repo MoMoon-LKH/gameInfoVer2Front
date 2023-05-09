@@ -1,10 +1,15 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Comment.css"
 
 const Comment = (props) => {
 
     const postId = props.postId;
+    const type = props.type;
+
+    useEffect(() => {
+        
+    }, [postId, type])
 
     const comments = [
         {

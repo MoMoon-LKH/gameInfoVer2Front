@@ -65,38 +65,31 @@ const NewsList = ({match}) => {
                 <Table className='posts-table'>
                     <thead>
                         <tr>
-                            <th style={{width: '10%'}}>번호</th>
+                            <th style={{width: '7%'}}>번호</th>
                             <th style={{width: '2%'}}></th>
-                            <th style={{width: '50%'}}>제목</th>
+                            <th style={{width: '45%'}}>제목</th>
                             <th style={{width: '18%'}}>작성자</th>
-                            <th style={{width: '10%'}}>작성일</th>
+                            <th style={{width: '18%'}}>작성일</th>
                             <th style={{width: '10%'}}>조회수</th>
                             <th style={{width: '10%'}}>추천수</th>
                         </tr>
                     </thead>
                     <tbody className='posts-table-body'>
-                        {list.size > 0 ?
-                            list.map(post => (                    
-                                <tr>
-                                    <td>{post.id}</td>
-                                    <td></td>
-                                    <td style={{textAlign: 'left'}}>
-                                        <Link to={"/news/" + post.id}>
-                                            {post.title}
-                                        </Link>
-                                    </td>
-                                    <td>{post.nickname}</td>
-                                    <td>{post.createDate}</td>
-                                    <td>{post.view}</td>
-                                    <td>{post.likes}</td>
-                                </tr>
-                            ))
-                            :
-                             <tr>
-                                <td colSpan={8}>조회되는 게시글이 없습니다</td>
-
-                             </tr>
-                            }
+                        {list.map(post => (                    
+                            <tr>
+                                <td>{post.id}</td>
+                                <td></td>
+                                <td style={{textAlign: 'left'}}>
+                                    <Link to={"/news/" + post.id}>
+                                        {post.title}
+                                    </Link>
+                                </td>
+                                <td>{post.nickname}</td>
+                                <td>{post.createDate}</td>
+                                <td>{post.view}</td>
+                                <td>{post.likes}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
             </div>

@@ -6,7 +6,6 @@
 
 .post-header {
     height: auto;
-    border-bottom: 1px solid lightgray;
 }
 
 .post-category {
@@ -17,7 +16,7 @@
     background-color: #f8f8f8;
     font-size: 18px;
     height: 40px;
-    padding-top: 12px;
+    padding-top: 5px;
     padding-left: 10px;
     border-bottom: 1px solid lightgray;
 }
@@ -39,9 +38,7 @@
 }
 
 .post-body {
-    padding: 20px;
-    
-    border-bottom: 1px solid lightgray;
+    width: 100%;
 }
 
 .post-likes-div {

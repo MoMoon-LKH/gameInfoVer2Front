@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./CreateNews.css"
 import { customAxios } from '../config/ApiUrl';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
@@ -17,11 +17,20 @@ const CreateNews = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const naviagte = useNavigate();
 
+    useEffect(() => {
+        //권한 확인
+        const bool = true
+
+        if(!bool) {
+            alert("해당 권한이 없습니다")
+            naviagte(-1)
+        }
+    }, [])
+
 
     const handleCategory = (e) => {
         setCategory(e.target.value)
     }
-
 
 
     const onClickCreate = () => {
@@ -30,7 +39,7 @@ const CreateNews = (props) => {
             title: title,
             content: content,
             imageIds: images,
-            //categoryId: category
+            platformId: category
         }
 
         if(category === "") {
@@ -63,9 +72,9 @@ const CreateNews = (props) => {
         
         const response = customAxios.post('/news/create', post)
         .then(response => {
-            if(response.status === 201) {
+            if(response.status === 201 || response.status === 200) {
                 alert("등록되었습니다")
-                naviagte("/post/" + response.data.id)
+                naviagte("/news/" + response.data.id)
 
             } else {
                 alert("등록에 실패하였습니다")
@@ -117,12 +126,12 @@ const CreateNews = (props) => {
                         <span style={{marginRight: '8px'}}>분류</span>
                         <select className="category-select" value={category} onChange={handleCategory}>
                             <option value={""}>선택</option>
-                            <option value={4}>PS5</option>
-                            <option value={5}>SWITCH</option>
-                            <option value={6}>XBOX</option>
-                            <option value={7}>PC</option>
-                            <option value={8}>모바일</option>
-                            <option value={9}>MULTI</option>
+                            <option value={1}>PS5</option>
+                            <option value={2}>SWITCH</option>
+                            <option value={3}>XBOX</option>
+                            <option value={4}>PC</option>
+                            <option value={5}>모바일</option>
+                            <option value={6}>MULTI</option>
                         </select>
                     </div>
                     <div className="post-sub-divs">
@@ -135,6 +144,7 @@ const CreateNews = (props) => {
                     config={{
                         placeholder: "내용을 입력해주세요",
                         image: {
+                            resizeUnit: 'px',
                             toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight'],
                             styles: [
                             'full',
