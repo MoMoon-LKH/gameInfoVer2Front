@@ -1,10 +1,16 @@
 import './NewsCategory.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 const NewsCategory = (props) => {
 
-    const [activeId, setActiveId] = useState(props.id);
+    const [activeId, setActiveId] = useState();
     const getListApi = props.getListApi;
+    
+
+    useEffect(() => {
+        setActiveId(props.activeId)
+    }, [props.activeId])
 
     const listApi = (id) => {
         setActiveId(id)

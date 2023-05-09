@@ -20,7 +20,6 @@ const Home = () => {
                 </div> 
                 <HomePostList />
             </div>
-            <Link to={'/post/create'}><button>작성</button></Link>
         </div>
     )
 }
