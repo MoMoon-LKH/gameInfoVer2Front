@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react"
-import "./CreateNews.css"
-import { customAxios } from '../config/ApiUrl';
+import "./UpdateNews.css"
+import { customAxios } from '../../config/ApiUrl';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor} from '@ckeditor/ckeditor5-react'
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
 
 
-const CreateNews = (props) => {
-
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
-    const [category, setCategory] = useState("")
-    const [images, setImages] = useState([])
+const UpdateNews = (props) => {
+    const {newsId} = useParams()
+    const location = useLocation()
+    const [title, setTitle] = useState(location.state.post.title)
+    const [content, setContent] = useState(location.state.post.content)
+    const [category, setCategory] = useState(location.state.post.platformDto.id)
+    const [images, setImages] = useState()
     const [isOpen, setIsOpen] = useState(false);
     const naviagte = useNavigate();
 
@@ -33,7 +34,7 @@ const CreateNews = (props) => {
     }
 
 
-    const onClickCreate = () => {
+    const onClickUpdate = () => {
         
         const post = {
             title: title,
@@ -49,7 +50,7 @@ const CreateNews = (props) => {
         } else if(post.content === "") {
             alert("해당 게시글 내용을 입력해주세요")
         } else {
-            ajaxCraeetPost(post)
+            ajaxUpdatePost(post)
         }
 
         
@@ -68,19 +69,19 @@ const CreateNews = (props) => {
         setIsOpen(true)
     }
 
-    const ajaxCraeetPost = (post) => {
+    const ajaxUpdatePost = (post) => {
         
-        const response = customAxios.post('/news/create', post)
+        const response = customAxios.put('/news/' + newsId, post)
         .then(response => {
             if(response.status === 201 || response.status === 200) {
-                alert("등록되었습니다")
+                alert("수정되었습니다")
                 naviagte("/news/" + response.data)
 
             } else {
-                alert("등록에 실패하였습니다")
+                alert("수정에 실패하였습니다")
             }
         }).catch(error => {
-            alert("등록에 실패하였습니다")
+            alert("수정에 실패하였습니다")
         })
         
     }
@@ -136,7 +137,7 @@ const CreateNews = (props) => {
                     </div>
                     <div className="post-sub-divs">
                         <span className="post-title-text">제목 </span> 
-                        <input className="post-title-input" placeholder="제목을 입력해주세요" onChange={e => setTitle(e.target.value)}></input>
+                        <input className="post-title-input" placeholder="제목을 입력해주세요" value={title} onChange={e => setTitle(e.target.value)}></input>
                     </div>
                 </div>
                 <CKEditor className='editor'
@@ -177,7 +178,7 @@ const CreateNews = (props) => {
                 />
             </div>
             <div className="button-div">
-                <button className="btns create-btn" onClick={onClickCreate}>작성</button>
+                <button className="btns create-btn" onClick={onClickUpdate}>수정</button>
                 <button className="btns cancel-btn" onClick={onClickCancel}>취소</button>
             </div>
 
@@ -203,5 +204,5 @@ const CreateNews = (props) => {
     )
 }
 
-export default CreateNews
+export default UpdateNews
 

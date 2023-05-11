@@ -12,6 +12,7 @@ import Category from './common/Category';
 import CreateNews from './post/CreateNews';
 import 'bootstrap/dist/css/bootstrap.css';
 import NewsList from './post/news/NewsList';
+import UpdateNews from './post/news/UpdateNews';
 
 
 
@@ -30,6 +31,7 @@ function App() {
             <Route path='/list/news/:platformId' element={<NewsList/>}></Route>
             <Route path='/news/:newsId' element={<PostDetail/>}></Route>
             <Route path='/news/create' element={<CreateNews/>}></Route>
+            <Route path='/news/update/:newsId' element={<UpdateNews/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/register/terms' element={<RegisterTerms/>}></Route>
             <Route path='/register' element={<Register/>}></Route>

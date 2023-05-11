@@ -1,9 +1,15 @@
+.comment-div {
+    margin-bottom: 20px;
+}
+
 .comment-title {
     text-align: left;
-    font-size: 18px;
+    font-size: 17px;
+    font-weight: bold;
     border-bottom: 1px solid lightgray;
     padding-left: 10px;
     padding-bottom: 10px;
+    
 }
 
 
@@ -34,4 +40,40 @@
 .comment-content {
     margin-top: 10px;
     text-align: left;
+}
+
+.comment-block {
+    width: 100%;
+    background-color: #F2F2F2;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-block-title {
+    margin: 40px;
+    font-weight: bold;
+}
+
+.comment-text {
+    
+    width: 75%;
+    height: 100px;
+    background-color: white;
+    margin: 10px;
+    border: none;
+    
+}
+
+.comment-btn {
+    height: 100px;
+    border: lightgray 1px solid;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: white;
+
+}
+
+.comment-btn:hover {
+    cursor: pointer;
 }

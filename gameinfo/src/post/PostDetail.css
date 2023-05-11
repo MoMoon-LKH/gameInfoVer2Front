@@ -63,3 +63,17 @@
 .post-likes-btn {
     width: 30px;
 }
+
+.detail-btn {
+    border: 1px lightgray solid;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+
+}
+
+.post-detail-btn {
+    text-align: right;
+    margin-top: 5px;
+
+}

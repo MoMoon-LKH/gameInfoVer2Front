@@ -1,37 +1,50 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Comment.css"
+import customAxios from '../config/ApiUrl';
 
 const Comment = (props) => {
 
     const postId = props.postId;
     const type = props.type;
+    const [page, setPage] = useState(0)
+    const [comments, setComments] = useState([])
+    const [total, setTotal] = useState(0)
+    const [content, setContent] = useState('');
+    const [isReply, setIsReply] = useState(false);
+
+    const getNewsComment = async () => {
+        customAxios.get("/comment/news/" + postId, {
+            params: {
+                page: page,
+            }
+        })
+        .then(response => {
+
+        })
+    }
+
+    const replyDiv = () => {
+        return ( 
+            <div className='comment-block' style={isReply ? {display:'block'} : {display:'none'}}>
+                <textarea className='comment-text' onChange={(e) => setContent(e.target.value)}/>
+                <button className='comment-btn'>등록</button>
+            </div>
+        )
+    }
+
 
     useEffect(() => {
-        
-    }, [postId, type])
+        if(type === 'news'){
 
-    const comments = [
-        {
-            id: 1,
-            memberId: 1,
-            nickname: '작성자',
-            content: '댓글 내용',
-            createDate: '2023-02-20 15:12:30'
-        },
-        {
-            id: 2,
-            memberId: 2,
-            nickname: '작성자2',
-            content: '댓글 내용',
-            createDate: '2023-02-20 15:12:30'
         }
-    ]
+            
+    }, [postId, type])
 
 
     return (
       <div className='comment-div'>
-            <div className='comment-title'>댓글</div>
+            <div className='comment-title'>댓글 ({total})</div>
             <div className='comment-body'>
                 {comments.map((comment) => (
                     <div className='comment' key={comment.id}>
@@ -53,9 +66,19 @@ const Comment = (props) => {
                         <div className='comment-content'>
                             {comment.content}
                         </div>
+                        <div className='comment-reply'>
+                            <div>
+                                <button>답글</button>
+                            </div>
+                            
+                        </div>
                     </div>
                 ))}
-                
+                <div className='comment-block' >
+                    <div className='comment-block-title'>댓글</div>
+                    <textarea className='comment-text' />
+                    <button className='comment-btn'>등록</button>
+                </div>
             </div>
       </div>
     );

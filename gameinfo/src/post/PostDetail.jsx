@@ -1,18 +1,18 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Comment from './Comment';
 import './PostDetail.css'
 import {AiOutlineLike, AiOutlineDislike, AiFillLike, AiFillDislike} from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import customAxios from '../config/ApiUrl';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Editor, { ClassicEditor } from 'ckeditor5-custom-build/build/ckeditor';
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
 
 const PostDetail = (props) => {
     
     const {newsId} = useParams();
     const [post, setPost] = useState({});
+    const navigator = useNavigate()
 
     // const post = {
     //     title: '포스트 타이틀',
@@ -26,8 +26,10 @@ const PostDetail = (props) => {
     //     createDate: '2023-02-20 13:50:00'
     // }
 
+
+
     const ajaxPostDetail = async (id) => {
-        customAxios.get('/news/' + id)
+         customAxios.get('/news/' + id)
         .then(response => {
             if(response.status === 200){
                 setPost(response.data)
@@ -39,24 +41,46 @@ const PostDetail = (props) => {
         ajaxPostDetail(newsId)
     }, [newsId])
 
+    const onClickUpdate = (e) => {
+        navigator('/news/update/' + newsId, {state:{post: post}})
+    }
+
+    const onClickDelete = (e) => {
+        customAxios.delete('/news/' + newsId)
+        .then(response => {
+            if(response.status == 200){
+                alert("삭제되었습니다")
+                navigator('/list/news/0')
+            } else if(response.status == 401) {
+                alert("해당 권한이 없습니다")
+            } else {
+                alert("삭제에 실패하였습니다")
+            }
+        })
+        .catch(error => {
+            alert("삭제에 실패하였습니다")
+        })
+    }
+
+
     return (
         <div>
             <div className='post-div'>
             <div className='post-header'>
-                    <div className='post-category'>category</div>
+                    <div className='post-category'> 뉴스 / {post.platformDto?.name}</div>
                     <div className='post-title'>
-                        {post.title}
+                        {post?.title}
                     </div>
                     <div className='post-header-sub'>
                         <div className='post-writer'>
-                            {post.nickname} ({post.memberId})
+                            {post?.memberDto?.nickname} ({post.memberDto?.id})
                         </div>
                         <div className='post-header-subs'>
                             <div className='post-header-sub-item'>
-                                조회수: {post.view}
+                                조회수: {post?.views}
                             </div>
                             <div className='post-header-sub-item'>
-                                {post.createDate}
+                                {post?.createDate}
                             </div>
                         </div>
                     </div>
@@ -74,6 +98,12 @@ const PostDetail = (props) => {
                 />
             </div>
 
+            <div className='post-detail-btn'>
+                    <button className='detail-btn' onClick={onClickUpdate}>수정</button>
+                    <button className='detail-btn' onClick={onClickDelete}>삭제</button>
+                </div>
+            </div>
+
             <div className='post-likes-div'>
                 <div className='post-likes-btn-div'>
                     <div className='post-likes-num'>
@@ -87,9 +117,9 @@ const PostDetail = (props) => {
                     </div>
                     <AiOutlineDislike size={'30px'}/>
                 </div>
+                
             </div>
             
-            </div>
 
             <Comment postId={newsId} type={'news'}/>   
         </div>

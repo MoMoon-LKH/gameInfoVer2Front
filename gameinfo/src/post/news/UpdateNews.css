@@ -1,0 +1,69 @@
+
+.post-create-div {
+    width: 95%;
+    margin: auto;
+}
+
+.post-sub-div {
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.post-sub-divs {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+input {
+    width: 50%;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.button-div{
+    width: 100%;
+    display: inline-block;
+}
+
+button {
+     width: 10%;
+     height: 35px;
+     font-size: 15px;
+    
+}
+
+.btns {
+    margin: 20px;
+}
+
+.create-btn {
+    background-color: #1a70dc;
+    color: white;
+    border: none;
+}
+
+.create-btn:hover {
+    background-color: #126eb4;
+    cursor: pointer;
+}
+
+.cancel-btn {
+     
+}
+
+.category-select {
+    width: 10%;
+    padding: 5px;
+}
+
+.modal {
+    display: 'block'; 
+    position: 'initial';
+    text-align: center;
+}
+
+.modal-btn {
+    width: 100px;
+}
