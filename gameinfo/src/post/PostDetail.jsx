@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Comment from './Comment';
+import Comment from '../comment/Comment';
 import './PostDetail.css'
 import {AiOutlineLike, AiOutlineDislike, AiFillLike, AiFillDislike} from 'react-icons/ai';
 import { useState, useEffect } from 'react';

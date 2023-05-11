@@ -77,3 +77,8 @@
 .comment-btn:hover {
     cursor: pointer;
 }
+
+.comment-reply-bottom {
+    width: 80%;
+    text-align: right;
+}
