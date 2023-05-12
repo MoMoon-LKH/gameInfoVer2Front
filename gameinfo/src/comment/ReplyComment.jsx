@@ -1,25 +1,32 @@
 import { useState } from "react"
 
 
-const ReplyComment = (props) => {
+const ReplyCommentWindow = (props) => {
 
-    const [isReply, setIsReply] = useState(false)
+    const [display, setDisplay] = useState(false)
     const onClickReply = props.onClickCreateReply
 
-    const handleIsReply = () => {
-        setIsReply(true)
+    const handleDisplay = () => {
+        if(display === false) {
+            props.setIsReply(true)
+            setDisplay(true)
+        } else {
+            props.setIsReply(false)
+            setDisplay(false)
+        }
     }
+
+
 
     return (
         <>
         <div className='comment-reply'>
-            <div>
-                <button onClick={handleIsReply}>답글</button>
-            </div>
+            <span className="reply-btn" onClick={handleDisplay}>답글</span>
         </div>
         <div className='comment-reply-bottom'>
-        {isReply ?? 
-            <div className='comment-block'>
+        {display && 
+            <div className='comment-reply-block'>
+                    <div className='comment-block-title'>댓글</div>
                     <textarea className='comment-text' value={props.content} onChange={(e) => props.setContent(e.target.value)}/>
                     <button className='comment-btn' onClick={onClickReply}>등록</button>
             </div>
@@ -29,4 +36,4 @@ const ReplyComment = (props) => {
     )
 }
 
-export default ReplyComment
+export default ReplyCommentWindow

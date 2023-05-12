@@ -78,7 +78,49 @@
     cursor: pointer;
 }
 
-.comment-reply-bottom {
-    width: 80%;
+.comment-reply{
+    width: 100%;
     text-align: right;
+}
+
+.comment-reply-bottom {
+    width: 95%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.reply-btn {
+    
+    font-size: 12px;
+}
+
+.reply-btn:hover {
+    cursor: pointer;
+}
+
+.comment-reply-block {
+    width: 100%;
+    background-color: #F2F2F2;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-replys {
+    width: 95%;
+    background-color: #F0F0F0;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.comment-replys-div {
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+
+}
+
+.comment-replyNickname {
+    font-size: 12px;
+    text-align: left;
 }
