@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import "./Comment.css"
 import customAxios from '../config/ApiUrl';
 import ReplyCommentWindow from './ReplyComment';
+import CustomPagination from './../post/page/CustomPagination';
 
 const Comment = (props) => {
 
@@ -147,6 +148,8 @@ const Comment = (props) => {
                         </div>
                     </div>
                 ))}
+                <CustomPagination total={total} lastNum={Math.floor(total/30)} 
+                    page={page} setPage={setPage} perPage={30}/>
                 {!isReply &&
                     <div className='comment-block' >
                         <div className='comment-block-title'>댓글</div>

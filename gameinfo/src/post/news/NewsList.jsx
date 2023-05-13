@@ -93,7 +93,7 @@ const NewsList = ({match}) => {
                     </tbody>
                 </Table>
             </div>
-            <CustomPagination total={total} page={page} setPage={setPage} perPage={perPage} lastNum={Math.ceil(total/perPage)} />
+            <CustomPagination total={total} page={page} setPage={setPage} perPage={perPage} lastNum={Math.floor(total/perPage)} />
             <div className='posts-search-div' style={{textAlign: 'right'}}>
                 <select value={searchSelect} onChange={handleSearchSelect} style={{width: '7%', height: '30px'}}>
                     <option value={'title'}>제목</option>
