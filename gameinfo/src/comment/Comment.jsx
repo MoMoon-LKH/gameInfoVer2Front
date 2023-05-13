@@ -91,7 +91,7 @@ const Comment = (props) => {
                                     {comment.nickname}
                                 </div>
                                 <div className='comment-top-info comment-create'>
-                                    ({comment.createDate})
+                                    <span className='comment-createDate'>({comment.createDate})</span>
                                 </div>        
                             </div>
                             <div className='comment-top-right'>
@@ -118,7 +118,7 @@ const Comment = (props) => {
                                         {comment.nickname}
                                     </div>
                                     <div className='comment-top-info comment-create'>
-                                        ({comment.createDate})
+                                    <span className='comment-createDate'>({comment.createDate})</span>
                                     </div>        
                                 </div>
                                 <div className='comment-top-right'>

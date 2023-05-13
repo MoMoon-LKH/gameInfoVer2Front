@@ -124,3 +124,8 @@
     font-size: 12px;
     text-align: left;
 }
+
+.comment-createDate {
+    color: gray;
+    font-size: 13px;
+}
