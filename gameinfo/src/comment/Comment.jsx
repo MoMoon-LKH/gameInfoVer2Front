@@ -14,19 +14,20 @@ const Comment = (props) => {
     const [content, setContent] = useState('');
     const [isReply, setIsReply] = useState(false)
 
-    const getNewsComment = async (id) => {
-        customAxios.get("/comment/news/" + id, {
-            params: {
-                page: page
-            }
-        })
-        .then(response => {
-            setTotal(response.data.total)
-            setComments(response.data.list)
-        })
+    const getNewsComment = async (id, page) => {
+        
+        if(type === 'news'){
+            customAxios.get("/comment/news/" + id, {
+                params: {
+                    page: page
+                }
+            })
+            .then(response => {
+                setTotal(response.data.total)
+                setComments(response.data.list)
+            })
+        }
     }
-
-    
 
    
 
@@ -38,7 +39,7 @@ const Comment = (props) => {
             postId: postId
         })
         .then(response => {
-            setTotal(response.data.total)
+            getNewsComment(postId, response.data.page)
         })
     
     }
@@ -66,11 +67,21 @@ const Comment = (props) => {
         })
     }
 
+    const onClickDelete = (id) => {
+        customAxios.delete('/comment/' + id)
+        .then(response => {
+            getNewsComment(postId, page)
+        })
+        .catch(error => {
+            alert('삭제 실패하였습니다')
+        })
+    }
+
 
 
     useEffect(() => {
         if(type === 'news'){
-            getNewsComment(postId)
+            getNewsComment(postId, page)
         }
             
     }, [])
@@ -92,6 +103,8 @@ const Comment = (props) => {
                                 </div>
                                 <div className='comment-top-info comment-create'>
                                     <span className='comment-createDate'>({comment.createDate})</span>
+                                    <span> </span>
+                                    <span className='comment-delete' onClick={() => onClickDelete(comment.id)}>X</span>
                                 </div>        
                             </div>
                             <div className='comment-top-right'>
@@ -101,9 +114,9 @@ const Comment = (props) => {
                         <div className='comment-content'>
                             {comment.content}
                         </div>
-                       
                         <ReplyCommentWindow onClickCreateReply={() => onClickCreateReply(comment.memberId, comment.groups)}
-                            content={content} setIsReply={setIsReply} setContent={setContent}/>
+                            content={content} setIsReply={setIsReply} setContent={setContent}
+                            />
                     </div>
 
                     : 
