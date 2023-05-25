@@ -13,7 +13,8 @@ import CreateNews from './post/CreateNews';
 import 'bootstrap/dist/css/bootstrap.css';
 import NewsList from './post/news/NewsList';
 import UpdateNews from './post/news/UpdateNews';
-
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import  Editor from 'ckeditor5-custom-build/build/ckeditor';
 
 
 function App() {

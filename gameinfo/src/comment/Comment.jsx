@@ -31,6 +31,10 @@ const Comment = (props) => {
     }
 
    
+    const getApi = (page) => {
+        setPage(page)
+        getNewsComment(postId, page)
+    }
 
     const onClickCreateComment = () => {
 
@@ -149,7 +153,7 @@ const Comment = (props) => {
                     </div>
                 ))}
                 <CustomPagination total={total} lastNum={Math.floor(total/30)} 
-                    page={page} setPage={setPage} perPage={30}/>
+                    page={page} setPage={getApi} perPage={30}/>
                 {!isReply &&
                     <div className='comment-block' >
                         <div className='comment-block-title'>댓글</div>

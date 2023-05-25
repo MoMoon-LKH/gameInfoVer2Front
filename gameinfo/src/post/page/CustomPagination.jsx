@@ -4,7 +4,7 @@ const CustomPagination = ({total, offset, page, setPage, lastNum}) => {
 
     const perPaging = 10
     const mod = Math.floor(total / perPaging) * perPaging
-    const pageList = []    
+    const pageList = []
 
     if(mod + perPaging > lastNum){
         for(let num = 0; num <= lastNum%10; num++) {
@@ -20,15 +20,15 @@ const CustomPagination = ({total, offset, page, setPage, lastNum}) => {
     return (
         <div className='posts-pagination' style={{display: 'flex', justifyContent: 'center'}}>
             <Pagination>
-                <Pagination.First onClick={() => setPage(1)} disabled={page === 0}/>
-                <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0}/>
+                <Pagination.First onClick={() => setPage(1)} disabled={page === 0} style={{cursor: 'pointer'}}/>
+                <Pagination.Prev onClick={() => setPage(page - 1)} disabled={page === 0} style={{cursor: 'pointer'}}/>
                 {pageList.map((num) => (
-                    <Pagination.Item key={num} onClick={() => setPage(num)} active={num === page}>
+                    <Pagination.Item key={num} onClick={() => setPage(num)} active={num === page} style={{cursor: 'pointer'}}>
                         {num + 1}
                     </Pagination.Item>
                 ))}
-                <Pagination.Next onClick={() => setPage(page + 1)} disabled={page === lastNum}/>
-                <Pagination.Last onClick={() => setPage(lastNum)} disabled={page === lastNum}/>
+                <Pagination.Next onClick={() => setPage(page + 1)} disabled={page === lastNum} style={{cursor: 'pointer'}}/>
+                <Pagination.Last onClick={() => setPage(lastNum)} disabled={page === lastNum} style={{cursor: 'pointer'}}/>
             </Pagination>
         </div>
     )

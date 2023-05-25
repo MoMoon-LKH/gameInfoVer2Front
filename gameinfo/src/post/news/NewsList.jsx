@@ -19,7 +19,7 @@ const NewsList = ({match}) => {
     const [searchInput, setSearchInput] = useState('')
     const navigator = useNavigate();
 
-    const getListApi = async (id) => {
+    const getListApi = async (id, page) => {
         customAxios.get("/news/list/" + id, {
             params: {
                 page: page,
@@ -34,9 +34,14 @@ const NewsList = ({match}) => {
         })
     }
 
+    const getApi = (page) => {
+        setPage(page)
+        getListApi(platformId, page)
+    }
+
     useEffect(() => {
         setSearchInput('')
-        getListApi(platformId)    
+        getListApi(platformId, page)    
     }, [platformId])
     
 
@@ -93,7 +98,7 @@ const NewsList = ({match}) => {
                     </tbody>
                 </Table>
             </div>
-            <CustomPagination total={total} page={page} setPage={setPage} perPage={perPage} lastNum={Math.floor(total/perPage)} />
+            <CustomPagination total={total} page={page} setPage={getApi} perPage={perPage} lastNum={Math.floor(total/perPage)} />
             <div className='posts-search-div' style={{textAlign: 'right'}}>
                 <select value={searchSelect} onChange={handleSearchSelect} style={{width: '7%', height: '30px'}}>
                     <option value={'title'}>제목</option>
