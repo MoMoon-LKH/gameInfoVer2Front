@@ -32,7 +32,7 @@ const Category = () => {
 
                 <div className="category-div">
                     <Link className='category-link' 
-                            to="">
+                            to="/develop">
                         <div className='category-text'>
                             리뷰
                         </div>
@@ -41,7 +41,7 @@ const Category = () => {
 
                 <div className="category-div">
                     <Link className='category-link'
-                        to="">
+                        to="/develop">
                         <div className='category-text'>
                             Games
                         </div>

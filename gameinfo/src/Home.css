@@ -15,4 +15,15 @@
     border-bottom: 1px solid gray;
     font-weight: bold;
     font-size: 17px;
+    text-overflow: ellipsis;
+}
+
+.post-bar-border {
+    text-align: left;
+    padding: 10px;
+    background-color: lightgray;
+    border-bottom: 1px solid gray;
+    font-weight: bold;
+    font-size: 17px;
+    border: 1px solid gray;    
 }

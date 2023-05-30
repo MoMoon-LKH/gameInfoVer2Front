@@ -15,6 +15,8 @@ import NewsList from './post/news/NewsList';
 import UpdateNews from './post/news/UpdateNews';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import  Editor from 'ckeditor5-custom-build/build/ckeditor';
+import CurrentDevelopment from './errorPage/CurrentDevelopment';
+import Footer from './common/Footer';
 
 
 function App() {
@@ -36,8 +38,10 @@ function App() {
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/register/terms' element={<RegisterTerms/>}></Route>
             <Route path='/register' element={<Register/>}></Route>
+            <Route path='/develop' element={<CurrentDevelopment/>}></Route>
           </Routes>
         </div>
+        <Footer/>
       </BrowserRouter>  
     </div>
   </AuthProvider>    
