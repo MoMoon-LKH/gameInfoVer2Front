@@ -6,7 +6,7 @@ const Footer = () => {
 
 
     return (
-        <div style={{width: '100%', borderTop: '1px solid gray'}}>
+        <div style={{width: '100%', borderTop: '1px solid gray', marginTop: '30px'}}>
             
             <div className="footer-div">
                 <div className="footer-content" style={{color: 'gray', fontSize: '20px', fontWeight: 'bold'}}>CONTACT</div> 
