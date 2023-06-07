@@ -70,6 +70,8 @@
 
 .image-item:hover {
     cursor: pointer;
+    opacity: 0.9;
+
 }
 
 .image-content {
@@ -77,9 +79,8 @@
     height: 100%;
 }
 
-.imgae-content-img {
+.image-content-img {
     width: 100%;
-    height: 100%;
+    height: 450px;
     overflow: hidden;
-    object-fit: cover;
 }
