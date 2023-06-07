@@ -10,18 +10,20 @@ const HomePostList = (props) => {
         {id: 2, title: 'title2', commentCnt: 5},
         {id: 3, title: 'title3', commentCnt: 4}
     ];
-    let [list, setList] = useState(example);
+    let [list, setList] = useState();
+
+    console.log(props.list)
 
     return (
         <div className='post-list'>
             <div className='post-lists'>
-            {list.map((post, index) => {
+            {props.list.map((post, index) => {
                     if (index % 2 === 0){
                         return(
                             <div className='post-item' key={post.id}>
                                 <div className='item item-title'> 
                                     <Link className='title-a' to={'/news/' + post.id} key={post.id}>
-                                        {post.title} [{post.commentCnt}]
+                                        {post.title}
                                     </Link>
                                 </div>
                             </div>
@@ -32,13 +34,13 @@ const HomePostList = (props) => {
                 })}        
             </div>
             <div className='post-lists'>
-                {list.map((post, index) => {
+                {props.list.map((post, index) => {
                     if (index % 2 === 1){
                         return(
                             <div className='post-item' key={post.id}>
                                 <div className='item item-title'> 
                                     <Link className='title-a' to={'/news/' + post.id} key={post.id}>
-                                        {post.title} [{post.commentCnt}]
+                                        {post.title}
                                     </Link>
                                 </div>
                             </div>

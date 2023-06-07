@@ -16,7 +16,6 @@ const Home = () => {
     useEffect(() => {
         const getData = async () => {
             const response = await customAxios.get("/main")
-            console.log(response.data.newsImageList)
 
             setNewsImageList(response.data.newsImageList)
             setNewsList(response.data.newsList)
@@ -74,7 +73,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div style={{width: '100%', border: '1px solid gray', padding:'10px'}}>
-                    <HomePostList list={newsList} type={"news"}/>
+                    <HomePostList list={newsList}/>
                 </div>
             </div>            
                 
@@ -82,7 +81,7 @@ const Home = () => {
                 <div className="post-bar">
                     <div className="post-bar-text">리뷰</div>    
                 </div> 
-                <HomePostList list={reviewList} type={"review"}/>
+                {/* <HomePostList list={reviewList}/> */}
             </div>
         </div>
     )

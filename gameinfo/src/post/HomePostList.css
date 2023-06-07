@@ -15,12 +15,13 @@
 }
 
 .post-item {
-    margin: 10px;
+    margin: 5px;
     color: black;
     font-size: 20px;
     width: 90%;
     white-space: nowrap;
 }
+
 
 .title-a {
     color: black;
@@ -37,5 +38,6 @@
 }
 
 .item-title {
+    font-size: 17px;
     text-overflow: ellipsis;
 }
