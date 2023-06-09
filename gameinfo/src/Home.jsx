@@ -37,40 +37,43 @@ const Home = () => {
                 <div className="post-bar-border">
                     <div className="post-bar-text">뉴스</div>    
                 </div>
-                <div className="image-list" style={{widht: '100%', height:'450px', position: 'relative'}}>
+                <div className="image-list" style={{widht: '100%', position: 'relative'}}>
                     <div className="image-items">
                         {newsImageList && newsImageList.map((news, index) =>
                             <Link to={'/news/' + newsImage.id}>
                                 <div className="image-item" key={index} onMouseEnter={() => onHoverNewsImageList(index)}>
-                                    {news.title}
+                                    <div className="image-item-text">
+                                        {news.title}
+                                    </div>
                                 </div>
                             </Link>
                         )}
                     </div>
                     <div className="image-content" style={
                         {
-                            height: '85%',
                             display: 'flex',
-                            flexDirection: 'column'
-                        }
+                            flexDirection: 'column'                        }
                         }>
                         {newsImageList &&
                             <Link to={'/news/' + newsImage.id}>
-                                <img className="image-content-img" 
-                                    src={"https://gameinfo.momoon.kro.kr/images/" + newsImage.imageName} 
+                                <div style={{height:'100%'}}>
+                                    <img className="image-content-img" 
+                                        src={"https://gameinfo.momoon.kro.kr/images/" + newsImage.imageName} 
                                         alt={newsImage.title}/>
+                                </div>
                             </Link>        
                         }         
+                        <div className="image-content-text">
+                            {newsImageList &&
+                                <Link to={'/news/' + newsImage.id}>
+                                    <div className="image-text" >
+                                        {newsImage.title}
+                                    </div>
+                                </Link>
+                            }
+                        </div>
                     </div>
-                    <div className="image-content-text">
-                        {newsImageList &&
-                            <Link to={'/news/' + newsImage.id}>
-                                <div className="image-text" >
-                                    {newsImage.title}
-                                </div>
-                            </Link>
-                        }
-                    </div>
+                    
                 </div>
                 <div style={{width: '100%', border: '1px solid gray', padding:'10px'}}>
                     <HomePostList list={newsList}/>

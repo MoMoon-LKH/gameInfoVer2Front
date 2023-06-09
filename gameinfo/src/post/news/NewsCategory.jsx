@@ -54,6 +54,12 @@ const NewsCategory = (props) => {
                     모바일
                 </div>
             </div>
+            <div className='news-category-div'>|</div>
+            <div className={activeId == 6 ? 'news-category-div active' : 'news-category-div'}>
+                <div className='news-category-link' onClick={()=>listApi(6)}>
+                    MULTI
+                </div>
+            </div>
         </div>
     )
 }

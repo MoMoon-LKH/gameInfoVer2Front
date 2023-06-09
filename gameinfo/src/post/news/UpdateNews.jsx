@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 
 
 const UpdateNews = (props) => {
+    
     const {newsId} = useParams()
     const location = useLocation()
     const [title, setTitle] = useState(location.state.post.title)
@@ -75,7 +76,7 @@ const UpdateNews = (props) => {
         .then(response => {
             if(response.status === 201 || response.status === 200) {
                 alert("수정되었습니다")
-                naviagte("/news/" + response.data)
+                naviagte("/news/" + newsId)
 
             } else {
                 alert("수정에 실패하였습니다")

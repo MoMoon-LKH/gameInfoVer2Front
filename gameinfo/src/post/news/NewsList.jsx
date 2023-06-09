@@ -90,7 +90,12 @@ const NewsList = ({match}) => {
                                     </Link>
                                 </td>
                                 <td>{post.nickname}</td>
-                                <td>{post.createDate}</td>
+                                {post.createDate ?
+                                    <td>{post.createDate}</td>    
+                                    :
+                                    <td>{post.createHour}</td>
+                                }
+                                
                                 <td>{post.views}</td>
                                 <td>{post.likesCount}</td>
                             </tr>

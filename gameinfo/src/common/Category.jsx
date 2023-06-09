@@ -96,6 +96,15 @@ const Category = () => {
                             </div>
                         </Link>
                     </div>
+                    <div className='dropdown-news'>
+                        <Link className='dropdown-link' 
+                            to="/list/news/6"
+                            >
+                            <div className='dropdown-item'>
+                                MULTI
+                            </div>
+                        </Link>
+                    </div>
                 </div>
                 
             </div>

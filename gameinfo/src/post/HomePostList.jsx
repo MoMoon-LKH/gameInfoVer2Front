@@ -12,8 +12,6 @@ const HomePostList = (props) => {
     ];
     let [list, setList] = useState();
 
-    console.log(props.list)
-
     return (
         <div className='post-list'>
             <div className='post-lists'>
