@@ -14,20 +14,6 @@ const PostDetail = (props) => {
     const [post, setPost] = useState({});
     const navigator = useNavigate()
 
-    // const post = {
-    //     title: '포스트 타이틀',
-    //     content: '주의 <div>sdf</div>',
-    //     commentCnt: 23,
-    //     memberId: '1',
-    //     nickname: '작성자',
-    //     view: 15,
-    //     likes: 0,
-    //     dislikes: 0,
-    //     createDate: '2023-02-20 13:50:00'
-    // }
-
-
-
     const ajaxPostDetail = async (id) => {
          customAxios.get('/news/' + id)
         .then(response => {
@@ -42,7 +28,23 @@ const PostDetail = (props) => {
     }, [newsId])
 
     const onClickUpdate = (e) => {
-        navigator('/news/update/' + newsId, {state:{post: post}})
+        customAxios.get('/auth/news/' + newsId)
+        .then(response => {
+            if(response.data == true) {
+                navigator('/news/update/' + newsId, {state:{post: post}})
+            } else {
+                alert(response.data.message)
+            }
+        
+        })
+        .catch(error => {
+            if(error.response.status == 401) {
+                alert('로그인 후 이용해주세요')
+                navigator('/login')
+            } else {
+                alert(error.response.data.message)
+            }
+        })
     }
 
     const onClickDelete = (e) => {
@@ -66,39 +68,39 @@ const PostDetail = (props) => {
     return (
         <div>
             <div className='post-div'>
-            <div className='post-header'>
-                    <div className='post-category'> 뉴스 / {post.platformDto?.name}</div>
-                    <div className='post-title'>
-                        {post?.title}
-                    </div>
-                    <div className='post-header-sub'>
-                        <div className='post-writer'>
-                            {post?.memberDto?.nickname} ({post.memberDto?.id})
+                <div className='post-header'>
+                        <div className='post-category'> 뉴스 / {post.platformDto?.name}</div>
+                        <div className='post-title'>
+                            {post?.title}
                         </div>
-                        <div className='post-header-subs'>
-                            <div className='post-header-sub-item'>
-                                조회수: {post?.views}
+                        <div className='post-header-sub'>
+                            <div className='post-writer'>
+                                {post?.memberDto?.nickname} ({post.memberDto?.id})
                             </div>
-                            <div className='post-header-sub-item'>
-                                {post?.createDate}
+                            <div className='post-header-subs'>
+                                <div className='post-header-sub-item'>
+                                    조회수: {post?.views}
+                                </div>
+                                <div className='post-header-sub-item'>
+                                    {post?.createDate}
+                                </div>
                             </div>
                         </div>
-                    </div>
-            </div>
-            <div className='post-body'>
-                <CKEditor className='editor'
-                    editor={Editor}
-                    disabled={true}
-                    config={{
-                        toolbar: 'none',
-                        isReadOnly: true
-                    }}
+                </div>
+                <div className='post-body'>
+                    <CKEditor className='editor'
+                        editor={Editor}
+                        disabled={true}
+                        config={{
+                            toolbar: 'none',
+                            isReadOnly: true
+                        }}
 
-                    data={post.content}
-                />
-            </div>
+                        data={post.content}
+                    />
+                </div>
 
-            <div className='post-detail-btn'>
+                <div className='post-detail-btn'>
                     <button className='detail-btn' onClick={onClickUpdate}>수정</button>
                     <button className='detail-btn' onClick={onClickDelete}>삭제</button>
                 </div>

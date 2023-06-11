@@ -10,7 +10,9 @@ export const customAxios = axios.create({
 
 async function refreshAccessToken() {
 
-    try {
+    try {        
+
+        
         const memberId = JSON.parse(localStorage.getItem('gameinfo')).member.id
         const response = await customAxios.post("/auth/reissue-token", {id: memberId}, {
             withCredentials: true
@@ -20,7 +22,6 @@ async function refreshAccessToken() {
         return response.data.accessToken
     } catch (error) {
         localStorage.removeItem('gameinfo')
-        throw error
     }
 
 }
