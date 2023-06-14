@@ -29,6 +29,11 @@
     margin: 20px;
 }
 
+.terms-checkboxs {
+    width: 12px;
+    margin-right: 5px;
+}
+
 
 textarea {
     width: 100%;
@@ -39,7 +44,8 @@ textarea {
 }
 
 .terms-check {
-    text-align: right;
+    display: flex;
+    justify-content: right;    
     font-size: 13px;
 }
 
@@ -59,5 +65,3 @@ textarea {
 .terms-btn:hover {
     background-color: #126eb4;
 }
-
-

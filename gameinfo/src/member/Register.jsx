@@ -259,8 +259,8 @@ const Register = () => {
                         onChange={e => setEmail(e.target.value)} placeholder={' ex) test@gmail.com'}/>
                         <button className='verify-btn' onClick={() => sendEmailAuthNum()}>전송</button>
                         <div className='register-input-email'>
-                            <div style={{fontSize: '13px'}}>인증번호 : </div>
-                            <input type={'text'} onChange={e => setAuthNum(e.target.value)}/><button className='verify-btn' onClick={() => confirmAuthNum()}>확인</button>
+                            <div style={{fontSize: '13px'}} >인증번호 : </div>
+                            <input className='confirm-email-num'  type={'text'} onChange={e => setAuthNum(e.target.value)}/><button className='verify-btn' onClick={() => confirmAuthNum()}>확인</button>
                             <span className='check-msg'> {authNumMsg}</span>
                         </div>
                     </div>

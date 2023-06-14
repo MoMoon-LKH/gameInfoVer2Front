@@ -6,6 +6,7 @@
     border: 1px solid gray;
 }
 
+
 .register-title {
     margin: 30px;
     font-size: 30px;
@@ -57,7 +58,7 @@
 .register-input {
     margin-left: 10px;
     width: 200px;
-    height: 20px;
+    height: 30px;
 }
 
 .register-input-email {
@@ -115,5 +116,6 @@
 }
 
 .confirm-email-num {
-
+    width: 130px;
+    height: 30px;
 }

@@ -34,7 +34,7 @@ const RegisterTerms = () => {
                     <textarea readOnly value={terms}></textarea>
                     <div className='terms-check'>
                         <input id='terms-checkbox' className='terms-checkboxs' type={'checkbox'} />
-                        <span>동의합니다</span>
+                        <span className='terms-checkboxs-text'>동의합니다</span>
                     </div>
                 </div>
                 <div className='terms'>
@@ -44,7 +44,7 @@ const RegisterTerms = () => {
                     <textarea readOnly value={personal}></textarea>
                     <div className='terms-check'>
                         <input id='personal-checkbox' className='terms-checkboxs' type={'checkbox'} />
-                        <span>동의합니다</span>
+                        <span className='terms-checkboxs-text'>동의합니다</span>
                     </div>
                 </div>
                 
