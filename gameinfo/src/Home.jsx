@@ -39,14 +39,15 @@ const Home = () => {
                 </div>
                 <div className="image-list" style={{widht: '100%', position: 'relative'}}>
                     <div className="image-items">
-                        {newsImageList && newsImageList.map((news, index) =>
-                            <Link to={'/news/' + newsImage.id}>
-                                <div className="image-item" key={index} onMouseEnter={() => onHoverNewsImageList(index)}>
-                                    <div className="image-item-text">
-                                        {news.title}
+                        {newsImageList.length > 0 &&
+                            newsImageList.map((news, index) =>
+                                <Link to={'/news/' + newsImage.id}>
+                                    <div className="image-item" key={index} onMouseEnter={() => onHoverNewsImageList(index)}>
+                                        <div className="image-item-text">
+                                            {news.title}
+                                        </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
                         )}
                     </div>
                     <div className="image-content" style={
@@ -54,7 +55,7 @@ const Home = () => {
                             display: 'flex',
                             flexDirection: 'column'                        }
                         }>
-                        {newsImageList &&
+                        {newsImageList.length > 0 &&
                             <Link to={'/news/' + newsImage.id}>
                                 <div style={{height:'100%'}}>
                                     <img className="image-content-img" 
@@ -64,7 +65,7 @@ const Home = () => {
                             </Link>        
                         }         
                         <div className="image-content-text">
-                            {newsImageList &&
+                            {newsImageList.length > 0 &&
                                 <Link to={'/news/' + newsImage.id}>
                                     <div className="image-text" >
                                         {newsImage.title}

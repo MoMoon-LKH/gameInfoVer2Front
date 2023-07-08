@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import {backUrl} from './../config/ApiUrl';
 import { useNavigate } from 'react-router-dom';
+import { Button, Modal } from 'react-bootstrap';
 
 const Register = () => {
 
@@ -29,6 +30,10 @@ const Register = () => {
     const [boolAuthNum, setBoolAuthNum] = useState(false);
     const [authNumMsg, setAuthNumMsg] = useState("");
 
+    const [modalBool, setModalBool] = useState(false);
+    const [modalMsg, setModalMsg] = useState("");
+    const [registerConfirm, setRegisterConfirm] = useState(false);
+
     const confirmId = () => {
         if(loginId.length < 5) {
             setLoginIdMsg("최소 5자 이상 입력해주세요");
@@ -42,7 +47,7 @@ const Register = () => {
             .catch(error => {
                 if(error.response.data.status == 409) {
                     setBoolId(false)
-                    setLoginIdMsg("중복되는 아이디가 존재합니다")
+                    setLoginIdMsg("중복된 아이디입니다")
                 }
             })
         }
@@ -66,15 +71,19 @@ const Register = () => {
         setBoolAuthNum(false)
 
         if(email != "") {
-            alert("인증메일이 발송되었습니다");
             axios.post(backUrl + "/email/authenticate", {
                 email: email
             })     
             .then(response => {
                 setEmailId(response.data.id);
+                openModal("인증메일이 발송되었습니다");
+
+            })
+            .catch(error => {
+                openModal(error.response.data.message)
             })   
         } else {
-            alert("인증메일을 입력해주세요")
+            openModal("인증메일을 입력해주세요")
         }
         
         
@@ -92,16 +101,18 @@ const Register = () => {
                 }
             })
             .catch(error => {
-                if(error.response.data.status == 400) {
+               if(error.response.data.status == 400) {
+                    setBoolAuthNum(false)
                     setAuthNumMsg(error.response.data.message)
                 }
 
-                if(error.resopnse.data.status == 404) {
+                if(error.response.data.status == 404) {
+                    setBoolAuthNum(false)
                     setAuthNumMsg('재전송 후 인증해주시길 바랍니다')
                 }
             })
         } else {
-            setAuthNumMsg("인증메일을 보내주세요")
+            setAuthNumMsg("인증할 메일을 입력해주시길 바랍니다")
         }
     }   
 
@@ -147,20 +158,20 @@ const Register = () => {
             name: name,
             birthday: birthday,
             nickname: nickname,
-            phoneNo: phoneNo.replace('-', ''),
+            phoneNo: phoneNo,
             email: email,
             boolCertifiedEmail: boolAuthNum
         }
 
         if(!boolId) {
             bool = false;
-            alert('아이디 중복확인 해주세요')
+            openModal('아이디 중복확인 해주세요')
         }else if(!boolPwd || !boolConfirmPwd) {
             bool = false;
-            alert('비밀번호를 확인해주세요')
+            openModal('비밀번호를 확인해주세요')
         }else if(!boolAuthNum) {
             bool = false;
-            alert('이메일 인증을 해주세요')
+            openModal('이메일 인증을 해주세요')
         }
 
         if(bool){
@@ -172,22 +183,56 @@ const Register = () => {
 
         axios.post(backUrl + "/members/register", info)
         .then(response => {
-            alert("회원가입이 완료되었습니다")
-            navigate('/login')
+            setRegisterConfirm(true)
+            openModal("회원가입이 완료되었습니다")
 
         })
         .catch(error => {
             const data = error.response.data;
             
             if(data.status === 409) {
-                alert(data.message)
+                openModal(data.message)
             }
         })
     }
 
 
+    const openModal = (msg) => {
+        setModalMsg(msg)
+        setModalBool(true)
+    }
+
+    const closeModal = () => {
+        setModalMsg("")
+        setModalBool(false)
+    }
+
+    const closeRegister = () => {
+        setModalMsg("")
+        setModalBool(false)
+        navigate('/login')
+    }
+
+
     return (
         <div className='register-form'>
+            <Modal show={modalBool} onHide={closeModal}>
+                <Modal.Body>
+                    <div style={{textAlign:'center', fontSize:'14px'}}>
+                        {modalMsg}
+                    </div>
+                </Modal.Body>
+                {registerConfirm ?
+                    <Button style={{margin:'10px auto', width:'30%', textAlign:'center' }} variant="primary" onClick={closeRegister}>
+                        확인
+                    </Button>
+                :
+                    <Button style={{margin:'10px auto', width:'30%', textAlign:'center' }} variant="primary" onClick={closeModal}>
+                        확인
+                    </Button>
+                }
+            </Modal>
+
             <div className='register-title'>
                 회원가입
             </div>
